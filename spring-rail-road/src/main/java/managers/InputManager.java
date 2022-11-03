@@ -1,9 +1,11 @@
 package managers;
 
+import abstractions.IInputManager;
+
 import java.util.Scanner;
 
 // TODO: wrap inputs in try/catch blocks (when UI is ready)
-public class InputManager {
+public class InputManager implements IInputManager {
     private Scanner scanner;
 
     public InputManager()

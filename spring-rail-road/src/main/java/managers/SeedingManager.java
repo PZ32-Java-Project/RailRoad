@@ -1,5 +1,6 @@
 package managers;
 
+import abstractions.ISeedingManager;
 import models.CashRegistry;
 import models.Client;
 import models.Entrance;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: create some seed data, add factory pattern
-public class SeedingManager {
+public class SeedingManager implements ISeedingManager {
     public List<Client> generateClients(int clientsCount) {
         List<Client> clients = new ArrayList<>();
         for (int i = 0; i < clientsCount; ++i) {

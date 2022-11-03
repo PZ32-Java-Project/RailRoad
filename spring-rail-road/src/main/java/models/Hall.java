@@ -1,5 +1,7 @@
 package models;
 
+import abstractions.IInputManager;
+import abstractions.ISeedingManager;
 import managers.InputManager;
 import managers.SeedingManager;
 import shared.Constants;
@@ -7,8 +9,8 @@ import shared.Constants;
 // TODO: add storage (List) for lines, etc?
 public class Hall {
     private Map map;
-    private InputManager inputManager;
-    private SeedingManager seedingManager;
+    private IInputManager inputManager;
+    private ISeedingManager seedingManager;
 
     public Hall() {
         map = Map.getInstance();
