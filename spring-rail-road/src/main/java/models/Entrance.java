@@ -9,4 +9,9 @@ public class Entrance extends Position {
         super(x, y);
         this.name = name;
     }
+
+    @Override
+    public String getData() {
+        return null;
+    }
 }

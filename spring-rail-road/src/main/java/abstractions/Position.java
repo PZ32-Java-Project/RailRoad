@@ -15,11 +15,13 @@ public abstract class Position {
     }
 
     public boolean isPosition(Position position) {
-        return this.x != position.x || this.y != position.y;
+        return this.x == position.x && this.y == position.y;
     }
 
     // TODO: move to a new manager?
     public double getDistance(Position position) {
         return Math.sqrt((this.x - position.x) * (this.x - position.x) + (this.y - position.y) * (this.y - position.y));
     }
+
+    public abstract String getData();
 }

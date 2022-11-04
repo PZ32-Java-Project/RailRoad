@@ -21,12 +21,12 @@ public class Hall {
     public void setDataFromUserInput() {
         Constants.entranceCount = inputManager.getEntranceCount();
         Constants.cashRegistriesCount = inputManager.getCashRegistriesCount();
-        Constants.cashRegistryServeTime = inputManager.getCashRegistryServeTime();
+        Constants.cashRegistryServeTimeMax = inputManager.getCashRegistryServeTime();
     }
 
-    public void SeedData() {
+    public void seedData() {
         // Call seedingManager here:
         // var cashRegistries = seedingManager.generateCashRegistries(Constants.cashRegistriesCount);
-        // map.tryAdd(...);
+        // map.tryAdd(cashRegistries.get(0));
     }
 }

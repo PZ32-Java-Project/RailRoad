@@ -17,4 +17,9 @@ public class CashRegistry extends Position {
         this.name = name;
         this.line = line;
     }
+
+    @Override
+    public String getData() {
+        return this.toString();
+    }
 }
