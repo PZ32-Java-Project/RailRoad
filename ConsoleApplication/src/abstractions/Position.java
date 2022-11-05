@@ -24,4 +24,13 @@ public abstract class Position {
     }
 
     public abstract String getData();
+    public Position getPosition(){
+        return this;
+    }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
 }

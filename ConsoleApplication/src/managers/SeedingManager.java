@@ -19,7 +19,7 @@ public class SeedingManager implements ISeedingManager {
         return clients;
     }
 
-    private static Client generateClient() {
+    public static Client generateClient() {
         return new Client(0, 0, "Vasyl", "Lysav");
     }
 
@@ -36,16 +36,15 @@ public class SeedingManager implements ISeedingManager {
         return new Entrance(0, 0, "Entrance A");
     }
 
-    public List<CashRegistry> generateCashRegistries(int cashRegistriesCount) {
+    public  List<CashRegistry>  generateCashRegistries(int cashRegistriesCount) {
         List<CashRegistry> cashRegistries = new ArrayList<>();
         for (int i = 0; i < cashRegistriesCount; ++i) {
             cashRegistries.add(generateCashRegistry());
         }
-
         return cashRegistries;
     }
 
-    private static CashRegistry generateCashRegistry() {
+    public static CashRegistry generateCashRegistry() {
         return new CashRegistry(0, 0, "Cash Registry A");
     }
 }
