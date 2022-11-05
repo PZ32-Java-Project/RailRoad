@@ -36,6 +36,11 @@ public class ClientServer extends Thread{
                     System.out.println("client " + client.getName() +" served at cash registry :" +cashRegistry.getName());
 
                 }
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
