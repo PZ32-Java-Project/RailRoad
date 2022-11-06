@@ -47,8 +47,6 @@ public class Client extends Position {
         this.name = name;
     }
 
-        return surname;
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
@@ -60,5 +58,6 @@ public class Client extends Position {
     public void setTicketsCount(int ticketsCount) {
         this.ticketsCount = ticketsCount;
     }
+
     //endregion
 }

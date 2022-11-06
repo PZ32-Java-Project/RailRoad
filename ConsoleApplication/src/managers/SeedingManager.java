@@ -21,7 +21,7 @@ public class SeedingManager implements ISeedingManager {
     public SeedingManager(){
         usedPositions = new ArrayList<>();
     }
-    public Client generateClient(ArrayList<Client> clients, ArrayList<Entrance> entrances) {
+    public Client generateClient(List<Client> clients, List<Entrance> entrances) {
         Client client;
         while(true){
             boolean flag = false;
@@ -34,7 +34,7 @@ public class SeedingManager implements ISeedingManager {
                 }
             }
             if(flag == false){
-                int chosenEntrance = rand.nextInt(0, 4);
+                int chosenEntrance = rand.nextInt(0, entrances.size());
                 int chosenName;
                 int chosenSurname;
                 while(true) {
@@ -79,26 +79,70 @@ public class SeedingManager implements ISeedingManager {
         Entrance entrance;
         switch (side){
             case 1:
-                x = rand.nextInt(0, MAP_WIDTH);
-                y = 0;
+                while (true){
+                    boolean flag = false;
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = 0;
+                    for(int i=0; i<usedPositions.size(); ++i){
+                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
+                            flag = true;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance A");
                 return entrance;
             case 2:
-                x = rand.nextInt(0, MAP_WIDTH);
-                y = MAP_HEIGHT;
+                while (true){
+                    boolean flag = false;
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = MAP_HEIGHT;
+                    for(int i=0; i<usedPositions.size(); ++i){
+                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
+                            flag = true;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance B");
                 return entrance;
             case 3:
-                x = 0;
-                y = rand.nextInt(0, MAP_HEIGHT);
+                while (true){
+                    boolean flag = false;
+                    x = 0;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    for(int i=0; i<usedPositions.size(); ++i){
+                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
+                            flag = true;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance C");
                 return entrance;
             case 4:
-                x = MAP_WIDTH;
-                y = rand.nextInt(0, MAP_HEIGHT);
+                while (true){
+                    boolean flag = false;
+                    x = MAP_WIDTH;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    for(int i=0; i<usedPositions.size(); ++i){
+                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
+                            flag = true;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance D");
                 return entrance;
@@ -123,17 +167,81 @@ public class SeedingManager implements ISeedingManager {
 
     private CashRegistry generateCashRegistry(int side, int ID) {
         Random rand = new Random();
+        int x;
+        int y;
+        CashRegistry registry;
         switch (side){
             case 1:
-                return new CashRegistry(rand.nextInt(0, MAP_WIDTH), 0, "Cash Registry A", ID);
+                while (true){
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = 0;
+                    boolean flag = false;
+                    for (int i=0; i<usedPositions.size(); ++i){
+                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
+                registry = new CashRegistry(x, y, "Cash Registry A", ID);
+                return registry;
             case 2:
-                return new CashRegistry(rand.nextInt(0, MAP_WIDTH), MAP_HEIGHT, "Cash Registry B", ID);
+                while (true){
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = MAP_HEIGHT;
+                    boolean flag = false;
+                    for (int i=0; i<usedPositions.size(); ++i){
+                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
+                registry = new CashRegistry(x, y, "Cash Registry B", ID);
+                return registry;
             case 3:
-                return new CashRegistry(0, rand.nextInt(0, MAP_HEIGHT), "Cash Registry C", ID);
+                while (true){
+                    x = 0;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    boolean flag = false;
+                    for (int i=0; i<usedPositions.size(); ++i){
+                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
+                registry = new CashRegistry(x, y, "Cash Registry C", ID);
+                return registry;
             case 4:
-                return new CashRegistry(MAP_WIDTH, rand.nextInt(0, MAP_HEIGHT), "Cash Registry D", ID);
+                while (true){
+                    x = MAP_WIDTH;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    boolean flag = false;
+                    for (int i=0; i<usedPositions.size(); ++i){
+                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag == false){
+                        break;
+                    }
+                }
+                registry = new CashRegistry(x, y, "Cash Registry D", ID);
+                return registry;
             default:
-                return new CashRegistry(1, 1, "Cash Registry E", ID);
+                registry = new CashRegistry(1, 0, "Cash Registry E", ID);
+                return registry;
         }
     }
 }

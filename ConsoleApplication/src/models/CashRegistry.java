@@ -7,11 +7,14 @@ public class CashRegistry extends Position {
     private Line line;
     private int ID;
 
+    private boolean onPause;
+
     public CashRegistry(int x, int y, String name, int ID) {
         super(x, y);
         this.name = name;
         this.ID = ID;
         line = new Line();
+        onPause=false;
     }
 
     public CashRegistry(int x, int y, String name, Line line) {
@@ -23,5 +26,29 @@ public class CashRegistry extends Position {
     @Override
     public String getData() {
         return this.toString();
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    public void setLine(Line line) {
+        this.line = line;
+    }
+
+    public boolean isOnPause() {
+        return onPause;
+    }
+
+    public void setOnPause(boolean onPause) {
+        this.onPause = onPause;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
