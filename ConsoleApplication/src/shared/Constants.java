@@ -12,6 +12,6 @@ public class Constants {
     public static int cashRegistryServeTimeMax; // In ms?
 
     public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmitriy", "Halina",
-            "Maria", "Olena", "Alexander", "Denis", "Maxim"};
+            "Maria", "Olena", "Olexander", "Denis", "Maxim"};
     public static final String[] surnames = {"Zelen", "Crow", "Horseshoe", "Dragonite", "April", "Ash", "Haine", "Hale"};
 }

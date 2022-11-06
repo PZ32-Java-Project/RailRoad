@@ -8,7 +8,10 @@ import shared.Constants;
 import threaded.ClientServer;
 import threaded.ClientsSpawner;
 
-import static shared.Constants.LINE_MAX_CLIENTS_COUNT;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import static shared.Constants.*;
 
 // TODO: add storage (List) for lines, etc?
 public class Hall {
@@ -21,42 +24,39 @@ public class Hall {
         inputManager = new InputManager();
         seedingManager = new SeedingManager();
     }
-    public void spawnClients(){
-        var thread = new ClientsSpawner(this);
-        thread.start();
-/*        int i=0;
-        boolean enableSpawning = true;
-        while(i<100) {
-            int clientsCount = map.getClients().size();
-            //int clientsLimit = LINE_MAX_CLIENTS_COUNT*map.getCashRegistries().size()
-            int clientsLimit = LINE_MAX_CLIENTS_COUNT * 2;
-            if (clientsCount >= clientsLimit)
-                enableSpawning=false;
-            else if(clientsCount<clientsLimit*0.7)
-                enableSpawning = true;
-            if (enableSpawning) {
-                var client = SeedingManager.generateClient();
-                map.getPositions().add(client);
-                System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
-            }
-            i++;
-        }*/
+
+    public void initialize(int cashCount, int entranceCount){
+        cashRegistriesCount=cashCount;
+        Constants.entranceCount =entranceCount;
+        Lock lock = new ReentrantLock();
+        generateCashRegistries();
+        generateCashEntrances();
+        spawnClients(lock);
+        initializeServing(lock);
     }
-    public void generateCashRegistries(int count){
-        var cashRegistries =  seedingManager.generateCashRegistries(count);
+    public void generateCashRegistries(){
+        var cashRegistries =  seedingManager.generateCashRegistries(cashRegistriesCount);
         map.getPositions().addAll(cashRegistries);
     }
-    public void initializeServing() {
+    public void generateCashEntrances(){
+        var entrances =  seedingManager.generateEntrances(entranceCount);
+        map.getPositions().addAll(entrances);
+    }
+    public void spawnClients(Lock lock){
+        var thread = new ClientsSpawner(this, lock,-1); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+        thread.start();
+    }
+    public void initializeServing(Lock lock) {
 
         for (var cashRegistry :map.getCashRegistries() ) {
-            var thread = new ClientServer((CashRegistry)cashRegistry ,this);
+            var thread = new ClientServer((CashRegistry)cashRegistry ,this, lock, -1); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
             thread.start();
         }
 
     }
     public void setDataFromUserInput() {
         Constants.entranceCount = inputManager.getEntranceCount();
-        Constants.cashRegistriesCount = inputManager.getCashRegistriesCount();
+        cashRegistriesCount = inputManager.getCashRegistriesCount();
         Constants.cashRegistryServeTimeMax = inputManager.getCashRegistryServeTime();
     }
 

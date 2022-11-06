@@ -8,42 +8,65 @@ import models.Hall;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static shared.Constants.LINE_MAX_CLIENTS_COUNT;
 
 public class ClientsSpawner extends Thread{
     private Hall hall;
-    public ClientsSpawner(Hall hall){
+    private Lock lock;
+    int interval;
+    public ClientsSpawner(Hall hall, Lock lock, int interval){
         this.hall=hall;
+        this.lock=lock;
+        this.interval=interval;
     }
     public void run(){
-        var map =hall.getMap();
 
+        var map =hall.getMap();
         boolean enableSpawning = true;
         while(true) {
-            int clientsCount = map.getClients().size();
-            int clientsLimit = LINE_MAX_CLIENTS_COUNT*map.getCashRegistries().size();
-            //int clientsLimit = LINE_MAX_CLIENTS_COUNT * 2;
-            if (clientsCount >= clientsLimit)
-                enableSpawning=false;
-            else if(clientsCount<clientsLimit*0.7)
-                enableSpawning = true;
-            if (enableSpawning) {
-                List<Position> cashRegistries = hall.getMap().getCashRegistries();
-                var client = SeedingManager.generateClient();
-                Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
-                var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
-                map.getPositions().add(client);
-                var cashLine = cashRegistry.getLine();
 
-                cashLine.tryAdd(client);
-                cashRegistry.setLine(cashLine);
-                System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+            try{
+                lock.lock();
+                int clientsCount = map.getClients().size();
+                int clientsLimit = LINE_MAX_CLIENTS_COUNT*map.getCashRegistries().size();
+                //int clientsLimit = LINE_MAX_CLIENTS_COUNT * 2;
+                if (clientsCount >= clientsLimit)
+                    enableSpawning=false;
+                else if(clientsCount<clientsLimit*0.7)
+                    enableSpawning = true;
+                if (enableSpawning) {
+                    List<Position> cashRegistries = hall.getMap().getCashRegistries();
+                    var clientsList = map.getClients();
+                    var entrancesList = map.getEntrances();
+                    var client =  new SeedingManager().generateClient(clientsList,entrancesList);
+                    Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
+                    var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
+                    map.getPositions().add(client);
+                    var cashLine = cashRegistry.getLine();
+                    cashLine.tryAdd(client);
+                    cashRegistry.setLine(cashLine);
+                    System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+                }
             }
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            finally {
+
+                lock.unlock();
+                try {
+                    if(interval==-1) {
+                        var random = new Random();
+                        //interval=random.nextInt(3000);
+                        sleep(random.nextInt(3000));
+                    }
+                    else{
+                        sleep(1000);
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

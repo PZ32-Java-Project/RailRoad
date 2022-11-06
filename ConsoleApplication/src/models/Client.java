@@ -27,6 +27,7 @@ public class Client extends Position {
         ++ticketsCount;
     }
 
+    //region GetSet
     public int getID(){
         return ID;
     }
@@ -46,8 +47,6 @@ public class Client extends Position {
     public void setName(String name) {
         this.name = name;
     }
-
-        return surname;
 
     public void setSurname(String surname) {
         this.surname = surname;

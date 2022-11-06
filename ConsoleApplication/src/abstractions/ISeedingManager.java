@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ISeedingManager {
-    public Client generateClient(ArrayList<Client> clients, ArrayList<Entrance> entrances);
+    public Client generateClient(List<Position> clients, List<Position> entrances);
     public List<Entrance> generateEntrances(int entrancesCount);
     public List<CashRegistry> generateCashRegistries(int cashRegistriesCount);
 }
