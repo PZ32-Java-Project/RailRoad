@@ -25,7 +25,6 @@ public class Map {
         {
             instance = new Map();
         }
-
         return instance;
     }
 

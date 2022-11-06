@@ -17,7 +17,6 @@ public class Line {
         if (clients.size() == Constants.LINE_MAX_CLIENTS_COUNT) {
             return false;
         }
-
         clients.add(client);
         return true;
     }

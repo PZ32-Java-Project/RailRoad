@@ -25,7 +25,6 @@ public class ClientServer extends Thread{
     public void run(){
         var map = hall.getMap();
         //Edit for priority queue
-        //Edit for technical pause
         while (!cashRegistry.isOnPause()) {
             var isNull = false;
             var isNotEmpty = false;
@@ -64,13 +63,11 @@ public class ClientServer extends Thread{
                 }
             }
             try {
-                    sleep(100);
+                sleep(100);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-
     }
-
 }

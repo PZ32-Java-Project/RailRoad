@@ -17,18 +17,18 @@ import static shared.Constants.*;
 // TODO: create some seed data, add factory pattern
 public class SeedingManager implements ISeedingManager {
     private ArrayList<Point> usedPositions;
-
     public SeedingManager(){
         usedPositions = new ArrayList<>();
     }
-    public Client generateClient(List<Client> clients, List<Entrance> entrances) {
+    public Client generateClient(List<Position> clients, List<Position> entrances) {
         Client client;
         while(true){
             boolean flag = false;
             Random rand = new Random();
             int chosenID = rand.nextInt(100);
             for(int i=0; i<clients.size(); ++i){
-                if(chosenID == clients.get(i).getID()){
+                var clientTemp =(Client)clients.get(i);
+                if(chosenID == clientTemp.getID()){
                     flag = true;
                     break;
                 }
@@ -42,8 +42,9 @@ public class SeedingManager implements ISeedingManager {
                     chosenSurname = rand.nextInt(0, surnames.length);
                     boolean flag2 = false;
                     for(int i=0; i<clients.size(); ++i){
-                        if(names[chosenName].equals(clients.get(i).getName())
-                                && surnames[chosenSurname].equals(clients.get(i).getSurname())){
+                        var clientTemp =(Client)clients.get(i);
+                        if(names[chosenName].equals(clientTemp.getName())
+                                && surnames[chosenSurname].equals(clientTemp.getSurname())){
                             flag2 = true;
                             break;
                         }
@@ -52,11 +53,10 @@ public class SeedingManager implements ISeedingManager {
                         break;
                     }
                 }
-                client = new Client(entrances.get(chosenEntrance), chosenID, names[chosenName], surnames[chosenSurname]);
+                client = new Client((Entrance) entrances.get(chosenEntrance), chosenID, names[chosenName], surnames[chosenSurname]);
                 break;
             }
         }
-
         return client;
     }
 
@@ -68,7 +68,6 @@ public class SeedingManager implements ISeedingManager {
         for (int i = 0; i < entrancesCount; ++i) {
             entrances.add(generateEntrance(i));
         }
-
         return entrances;
     }
 
@@ -161,7 +160,6 @@ public class SeedingManager implements ISeedingManager {
         for (int i = 0; i < cashRegistriesCount; ++i) {
             cashRegistries.add(generateCashRegistry(i, (i+1)));
         }
-
         return cashRegistries;
     }
 

@@ -6,7 +6,6 @@ public class CashRegistry extends Position {
     private String name;
     private Line line;
     private int ID;
-
     private boolean onPause;
 
     public CashRegistry(int x, int y, String name, int ID) {
@@ -16,7 +15,6 @@ public class CashRegistry extends Position {
         line = new Line();
         onPause=false;
     }
-
     public CashRegistry(int x, int y, String name, Line line) {
         super(x, y);
         this.name = name;

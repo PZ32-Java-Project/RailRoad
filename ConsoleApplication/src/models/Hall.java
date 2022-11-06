@@ -34,25 +34,29 @@ public class Hall {
         spawnClients(lock);
         initializeServing(lock);
     }
-    public void generateCashRegistries(){
-        var cashRegistries =  seedingManager.generateCashRegistries(cashRegistriesCount);
-        map.getPositions().addAll(cashRegistries);
-    }
-    public void generateCashEntrances(){
-        var entrances =  seedingManager.generateEntrances(entranceCount);
-        map.getPositions().addAll(entrances);
-    }
+
     public void spawnClients(Lock lock){
-        var thread = new ClientsSpawner(this); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+        var thread = new ClientsSpawner(this, lock,-1); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
         thread.start();
     }
-    public void initializeServing(Lock lock) {
 
+    public void initializeServing(Lock lock) {
         for (var cashRegistry :map.getCashRegistries() ) {
             var thread = new ClientServer((CashRegistry)cashRegistry ,this, lock, -1); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
             thread.start();
         }
     }
+
+    public void generateCashRegistries(){
+        var cashRegistries =  seedingManager.generateCashRegistries(cashRegistriesCount);
+        map.getPositions().addAll(cashRegistries);
+    }
+
+    public void generateCashEntrances(){
+        var entrances =  seedingManager.generateEntrances(entranceCount);
+        map.getPositions().addAll(entrances);
+    }
+
     public void setDataFromUserInput() {
         Constants.entranceCount = inputManager.getEntranceCount();
         cashRegistriesCount = inputManager.getCashRegistriesCount();
