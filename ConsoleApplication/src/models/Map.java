@@ -43,6 +43,9 @@ public class Map {
     public List<Position>getClients(){
      return positions.stream().filter(c -> c instanceof Client).collect(Collectors.toList());
     }
+    public List<Position> getEntrances(){
+        return positions.stream().filter(c -> c instanceof Entrance).collect(Collectors.toList());
+    }
     public List<Position> getCashRegistries(){
         return positions.stream().filter(c -> c instanceof CashRegistry).collect(Collectors.toList());
     }

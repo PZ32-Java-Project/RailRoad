@@ -27,6 +27,7 @@ public class Client extends Position {
         ++ticketsCount;
     }
 
+    //region GetSet
     public int getID(){
         return ID;
     }
