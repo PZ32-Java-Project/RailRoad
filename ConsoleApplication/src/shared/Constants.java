@@ -10,4 +10,8 @@ public class Constants {
     public static int entranceCount;
     public static int cashRegistriesCount;
     public static int cashRegistryServeTimeMax; // In ms?
+
+    public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmitriy", "Halina",
+            "Maria", "Olena", "Alexander", "Denis", "Maxim"};
+    public static final String[] surnames = {"Zelen", "Crow", "Horseshoe", "Dragonite", "April", "Ash", "Haine", "Hale"};
 }

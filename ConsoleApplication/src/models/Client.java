@@ -3,18 +3,21 @@ package models;
 import abstractions.Position;
 import shared.Constants;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Client extends Position {
     private String name;
     private String surname;
     private int ticketsCount;
+    private int ID;
 
-    public Client(int x, int y, String name, String surname)
+    public Client(Entrance entrance, int ID, String name, String surname)
     {
-        super(x, y);
+        super(entrance.getX(), entrance.getY());
         this.name = name;
         this.surname = surname;
+        this.ID = ID;
         generateTickets();
     }
 
@@ -22,6 +25,17 @@ public class Client extends Position {
         var random = new Random();
         ticketsCount = random.nextInt(Constants.CLIENT_MAX_TICKETS_COUNT);
         ++ticketsCount;
+    }
+
+    public int getID(){
+        return ID;
+    }
+    public String getName(){
+        return name;
+    }
+
+    public String getSurname(){
+        return surname;
     }
 
     @Override

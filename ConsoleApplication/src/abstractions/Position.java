@@ -17,6 +17,12 @@ public abstract class Position {
     public boolean isPosition(Position position) {
         return this.x == position.x && this.y == position.y;
     }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
 
     // TODO: move to a new manager?
     public double getDistance(Position position) {
