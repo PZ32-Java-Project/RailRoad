@@ -42,4 +42,23 @@ public class Client extends Position {
     public String getData() {
         return this.toString();
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+        return surname;
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getTicketsCount() {
+        return ticketsCount;
+    }
+
+    public void setTicketsCount(int ticketsCount) {
+        this.ticketsCount = ticketsCount;
+    }
+    //endregion
 }
