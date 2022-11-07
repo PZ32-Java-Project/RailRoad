@@ -9,7 +9,8 @@ public class Constants {
     // From input manager
     public static int entranceCount;
     public static int cashRegistriesCount;
-    public static int cashRegistryServeTimeMax; // In ms?
+    public static int cashRegistryServeTime;
+    public static int spawnInterval;
 
     public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmitriy", "Halina",
             "Maria", "Olena", "Olexander", "Denis", "Maxim"};

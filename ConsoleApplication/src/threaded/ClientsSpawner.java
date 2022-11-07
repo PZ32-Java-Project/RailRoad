@@ -59,7 +59,7 @@ public class ClientsSpawner extends Thread{
                         sleep(random.nextInt(3000));
                     }
                     else{
-                        sleep(1500);
+                        sleep(interval);
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

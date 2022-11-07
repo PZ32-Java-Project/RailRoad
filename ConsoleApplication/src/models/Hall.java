@@ -25,9 +25,11 @@ public class Hall {
         seedingManager = new SeedingManager();
     }
 
-    public void initialize(int cashCount, int entranceCount){
-        cashRegistriesCount=cashCount;
+    public void initialize(int cashCount, int entranceCount, int spawnInterval, int cashRegistryServeTime){
+        Constants.cashRegistriesCount=cashCount;
         Constants.entranceCount =entranceCount;
+        Constants.spawnInterval = spawnInterval;
+        Constants.cashRegistryServeTime=cashRegistryServeTime;
         Lock lock = new ReentrantLock();
         generateCashRegistries();
         generateCashEntrances();
@@ -36,13 +38,13 @@ public class Hall {
     }
 
     public void spawnClients(Lock lock){
-        var thread = new ClientsSpawner(this, lock,-1); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+        var thread = new ClientsSpawner(this, lock,spawnInterval); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
         thread.start();
     }
 
     public void initializeServing(Lock lock) {
         for (var cashRegistry :map.getCashRegistries() ) {
-            var thread = new ClientServer((CashRegistry)cashRegistry ,this, lock, -1); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+            var thread = new ClientServer((CashRegistry)cashRegistry ,this, lock, cashRegistryServeTime); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
             thread.start();
         }
     }
@@ -60,7 +62,7 @@ public class Hall {
     public void setDataFromUserInput() {
         Constants.entranceCount = inputManager.getEntranceCount();
         cashRegistriesCount = inputManager.getCashRegistriesCount();
-        Constants.cashRegistryServeTimeMax = inputManager.getCashRegistryServeTime();
+        Constants.cashRegistryServeTime = inputManager.getCashRegistryServeTime();
     }
 
     public void seedData() {

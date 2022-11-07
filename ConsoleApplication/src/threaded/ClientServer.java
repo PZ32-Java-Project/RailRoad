@@ -40,7 +40,6 @@ public class ClientServer extends Thread{
                     try {
                         if(interval==-1) {
                             var random = new Random();
-                            //interval=random.nextInt(5000)+10000;
                             sleep(random.nextInt(5000)+10000);
                         }
                         else{
