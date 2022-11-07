@@ -54,12 +54,20 @@ public class ClientsSpawner extends Thread{
             finally {
                 lock.unlock();
                 try {
+                    if(hall.isTerminate()){
+                        System.out.println("Spawner has stopped");
+                        return;
+                    }
                     if(interval==-1) {
                         var random = new Random();
                         sleep(random.nextInt(3000));
                     }
                     else{
                         sleep(interval);
+                    }
+                    if(hall.isTerminate()){
+                        System.out.println("Spawner has stopped");
+                        return;
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

@@ -12,7 +12,7 @@ public class CashRegistry extends Position {
         super(x, y);
         this.name = name;
         this.ID = ID;
-        line = new Line();
+        line = new Line(ID);
         onPause=false;
     }
     public CashRegistry(int x, int y, String name, Line line) {
@@ -48,5 +48,13 @@ public class CashRegistry extends Position {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

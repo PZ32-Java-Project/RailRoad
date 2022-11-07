@@ -18,6 +18,7 @@ public class Hall {
     private Map map;
     private IInputManager inputManager;
     private ISeedingManager seedingManager;
+    private boolean terminate = false;
 
     public Hall() {
         map = Map.getInstance();
@@ -26,6 +27,7 @@ public class Hall {
     }
 
     public void initialize(int cashCount, int entranceCount, int spawnInterval, int cashRegistryServeTime){
+        terminate =false;
         Constants.cashRegistriesCount=cashCount;
         Constants.entranceCount =entranceCount;
         Constants.spawnInterval = spawnInterval;
@@ -36,7 +38,9 @@ public class Hall {
         spawnClients(lock);
         initializeServing(lock);
     }
-
+    public void stop(){
+        terminate =true;
+    }
     public void spawnClients(Lock lock){
         var thread = new ClientsSpawner(this, lock,spawnInterval); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
         thread.start();
@@ -73,4 +77,10 @@ public class Hall {
     public Map getMap(){
         return map;
     }
+
+    public boolean isTerminate() {
+        return terminate;
+    }
+
+
 }

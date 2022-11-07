@@ -8,8 +8,10 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Line {
+    private int ID;
     private Queue<Client> clients;
-    public Line(){
+    public Line(int ID){
+        this.ID=ID;
         clients = new LinkedList<>();
     }
     public boolean tryAdd(Client client) {

@@ -38,12 +38,20 @@ public class ClientServer extends Thread{
             if (isNull){
                 if (isNotEmpty) {
                     try {
+                        if(hall.isTerminate()){
+                            System.out.println("ClientServer "+ cashRegistry.getID() +" has stopped");
+                            return;
+                        }
                         if(interval==-1) {
                             var random = new Random();
                             sleep(random.nextInt(5000)+10000);
                         }
                         else{
                             sleep(interval);
+                        }
+                        if(hall.isTerminate()){
+                            System.out.println("ClientServer "+ cashRegistry.getID() +" has stopped");
+                            return;
                         }
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
