@@ -20,8 +20,8 @@ public class Hall {
     private Map map;
     private IInputManager inputManager;
     private ISeedingManager seedingManager;
-    private boolean terminate = false;
     private Pane pane;
+    private boolean terminate = false;
 
     public Hall(Pane pane) {
         map = Map.getInstance();

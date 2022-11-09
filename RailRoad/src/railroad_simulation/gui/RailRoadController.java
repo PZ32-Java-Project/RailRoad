@@ -7,10 +7,8 @@ import models.Hall;
 
 public class RailRoadController {
     // для автоматичного або ручного вводу радіо-бат
-
     @FXML
     Pane pane;
-
     Hall hall;
 
     @FXML

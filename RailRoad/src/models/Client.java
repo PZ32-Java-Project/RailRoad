@@ -1,5 +1,6 @@
 package models;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,13 +24,14 @@ public class Client extends Position {
         this.pane = pane;
         generateTickets();
     }
-
     private void generateTickets() {
         var random = new Random();
         ticketsCount = random.nextInt(Constants.CLIENT_MAX_TICKETS_COUNT);
         ++ticketsCount;
     }
+    public void MoveTo(Position position){
 
+    }
     //region GetSet
     public int getId(){
         return id;
