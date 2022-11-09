@@ -1,15 +1,15 @@
-package railroad_simulation.models;
+package models;
 
-import railroad_simulation.shared.Constants;
+import shared.Constants;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Line {
+    private int ID;
     private Queue<Client> clients;
-    public Line(){
+    public Line(int ID){
+        this.ID=ID;
         clients = new LinkedList<>();
     }
     public boolean tryAdd(Client client) {
@@ -26,5 +26,9 @@ public class Line {
 
     public void setClients(Queue<Client> clients) {
         this.clients = clients;
+    }
+
+    public void tryDelete(){
+        clients.remove();
     }
 }

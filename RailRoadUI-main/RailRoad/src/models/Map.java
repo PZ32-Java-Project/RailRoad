@@ -1,7 +1,7 @@
-package railroad_simulation.models;
+package models;
 
-import railroad_simulation.abstractions.Position;
-import railroad_simulation.shared.Constants;
+import abstractions.Position;
+import shared.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

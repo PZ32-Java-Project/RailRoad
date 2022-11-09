@@ -2,7 +2,7 @@ package railroad_simulation.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
-import railroad_simulation.models.Hall;
+import models.Hall;
 
 public class RailRoadController {
     // для автоматичного або ручного вводу радіо-бат
@@ -16,6 +16,6 @@ public class RailRoadController {
     public void initialize()
     {
         railRoad = new Hall();
-        railRoad.initialize(5, 2, -1, -1, hall);
+        // railRoad.initialize(5, 2, -1, -1, hall);
     }
 }

@@ -1,4 +1,4 @@
-package railroad_simulation.abstractions;
+package abstractions;
 
 public abstract class Position {
     private int x;

@@ -1,39 +1,37 @@
-package railroad_simulation.threaded;
+package threaded;
 
-import javafx.application.Platform;
-import javafx.scene.layout.Pane;
-import railroad_simulation.abstractions.Position;
-import railroad_simulation.managers.SeedingManager;
-import railroad_simulation.models.CashRegistry;
-import railroad_simulation.models.Client;
-import railroad_simulation.models.Hall;
+import abstractions.Position;
+import managers.SeedingManager;
+import models.CashRegistry;
+import models.Client;
+import models.Hall;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
-import static railroad_simulation.shared.Constants.LINE_MAX_CLIENTS_COUNT;
+import static shared.Constants.LINE_MAX_CLIENTS_COUNT;
 
 public class ClientsSpawner extends Thread{
     private Hall hall;
     private Lock lock;
     int interval;
-    Pane myHall;
-
-    public ClientsSpawner(Hall hall, Lock lock, int interval, Pane Hall){
+    public ClientsSpawner(Hall hall, Lock lock, int interval){
         this.hall=hall;
         this.lock=lock;
         this.interval=interval;
-        this.myHall = Hall;
     }
-
     public void run(){
-        var map = hall.getMap();
+
+        var map =hall.getMap();
         boolean enableSpawning = true;
         while(true) {
             try{
                 lock.lock();
                 int clientsCount = map.getClients().size();
                 int clientsLimit = LINE_MAX_CLIENTS_COUNT*map.getCashRegistries().size();
+                //int clientsLimit = LINE_MAX_CLIENTS_COUNT * 2;
                 if (clientsCount >= clientsLimit)
                     enableSpawning=false;
                 else if(clientsCount<clientsLimit*0.7)
@@ -42,11 +40,10 @@ public class ClientsSpawner extends Thread{
                     List<Position> cashRegistries = hall.getMap().getCashRegistries();
                     var clientsList = map.getClients();
                     var entrancesList = map.getEntrances();
-                    var client =  new SeedingManager().generateClient(clientsList,entrancesList, myHall);
+                    var client =  new SeedingManager().generateClient(clientsList,entrancesList);
                     Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
                     var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
                     map.getPositions().add(client);
-                    Platform.runLater(() -> client.clientUI());
                     var cashLine = cashRegistry.getLine();
                     cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
@@ -56,12 +53,20 @@ public class ClientsSpawner extends Thread{
             finally {
                 lock.unlock();
                 try {
+                    if(hall.isTerminate()){
+                        System.out.println("Spawner has stopped");
+                        return;
+                    }
                     if(interval==-1) {
                         var random = new Random();
                         sleep(random.nextInt(3000));
                     }
                     else{
                         sleep(interval);
+                    }
+                    if(hall.isTerminate()){
+                        System.out.println("Spawner has stopped");
+                        return;
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

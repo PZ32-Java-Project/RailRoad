@@ -1,15 +1,10 @@
-package railroad_simulation.threaded;
+package threaded;
 
-import railroad_simulation.managers.SeedingManager;
-import railroad_simulation.models.CashRegistry;
-import railroad_simulation.models.Hall;
-import railroad_simulation.shared.Constants;
+import models.CashRegistry;
+import models.Hall;
 
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
-
-import static railroad_simulation.shared.Constants.LINE_MAX_CLIENTS_COUNT;
-import static railroad_simulation.shared.Constants.cashRegistriesCount;
 
 public class ClientServer extends Thread{
     private CashRegistry cashRegistry;
@@ -38,12 +33,20 @@ public class ClientServer extends Thread{
             if (isNull){
                 if (isNotEmpty) {
                     try {
+                        if(hall.isTerminate()){
+                            System.out.println("ClientServer "+ cashRegistry.getID() +" has stopped");
+                            return;
+                        }
                         if(interval==-1) {
                             var random = new Random();
                             sleep(random.nextInt(5000)+10000);
                         }
                         else{
                             sleep(interval);
+                        }
+                        if(hall.isTerminate()){
+                            System.out.println("ClientServer "+ cashRegistry.getID() +" has stopped");
+                            return;
                         }
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);

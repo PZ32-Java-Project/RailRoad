@@ -1,6 +1,6 @@
-package railroad_simulation.managers;
+package managers;
 
-import railroad_simulation.abstractions.IInputManager;
+import abstractions.IInputManager;
 
 import java.util.Scanner;
 

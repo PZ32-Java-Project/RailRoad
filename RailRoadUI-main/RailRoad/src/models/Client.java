@@ -1,11 +1,7 @@
-package railroad_simulation.models;
+package models;
 
-import javafx.concurrent.Task;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import railroad_simulation.abstractions.Position;
-import railroad_simulation.shared.Constants;
+import abstractions.Position;
+import shared.Constants;
 
 import java.util.Random;
 
@@ -15,17 +11,12 @@ public class Client extends Position {
     private int ticketsCount;
     private int ID;
 
-    //додати поля Circle і Pane
-    // в конструктор додати панель
-    private Circle client;
-    private Pane hall;
-    public Client(Entrance entrance, int ID, String name, String surname, Pane hall)
+    public Client(Entrance entrance, int ID, String name, String surname)
     {
         super(entrance.getX(), entrance.getY());
         this.name = name;
         this.surname = surname;
         this.ID = ID;
-        this.hall = hall;
         generateTickets();
     }
 
@@ -67,22 +58,6 @@ public class Client extends Position {
     public void setTicketsCount(int ticketsCount) {
         this.ticketsCount = ticketsCount;
     }
-
-    public void clientUI()
-    {
-        this.client = new Circle(1, Color.BLUE);
-        client.setStroke(Color.BLUE);
-        client.setTranslateX(this.getX());
-        client.setTranslateY(this.getY());
-        client.setFill(Color.BLUE);
-        hall.getChildren().add(client);
-    }
-
-   /* @Override
-    protected Long call() throws Exception {
-        this.clientUI();
-        return null;
-    }*/
 
     //endregion
 }
