@@ -17,55 +17,47 @@ import static shared.Constants.*;
 
 // TODO: create some seed data, add factory pattern
 public class SeedingManager implements ISeedingManager {
-    private ArrayList<Point> usedPositions;
+    private List<Point> usedPositions;
     private boolean generatedReserveRegistry = false;
-    private int id = 1;
     private Pane pane;
+
+    private static int currentClientId = 0;
+    private static int currentCashRegistryId = 0;
+    private static char currentEntranceSymbol = 'A';
+    private static char currentCashRegistrySymbol = 'A';
 
     public SeedingManager(Pane pane){
         usedPositions = new ArrayList<>();
-        id = 1;
         this.pane = pane;
     }
 
     public Client generateClient(List<Position> clients, List<Position> entrances) {
         Client client;
-        while(true){
-            boolean flag = false;
-            Random rand = new Random();
-            int chosenID = rand.nextInt(100);
-            for(int i=0; i<clients.size(); ++i){
-                var clientTemp =(Client)clients.get(i);
-                if(chosenID == clientTemp.getId()){
-                    flag = true;
-                    break;
-                }
-            }
-            if(flag == false){
-                int chosenEntrance = rand.nextInt(0, entrances.size());
-                int chosenName;
-                int chosenSurname;
-                while(true) {
-                    chosenName = rand.nextInt(0, names.length);
-                    chosenSurname = rand.nextInt(0, surnames.length);
-                    boolean flag2 = false;
-                    for(int i=0; i<clients.size(); ++i){
-                        var clientTemp =(Client)clients.get(i);
-                        if(names[chosenName].equals(clientTemp.getName())
-                                && surnames[chosenSurname].equals(clientTemp.getSurname())){
-                            flag2 = true;
-                            break;
-                        }
-                    }
-                    if(flag2 == false){
-                        break;
-                    }
-                }
-                client = new Client((Entrance) entrances.get(chosenEntrance), chosenID, names[chosenName], surnames[chosenSurname], pane);
+        Random rand = new Random();
+        int chosenEntrance = rand.nextInt(0, entrances.size());
+        String chosenName;
+        String chosenSurname;
+        while(true) {
+            var currentName = names[rand.nextInt(0, names.length)];
+            var currentSurname = surnames[rand.nextInt(0, surnames.length)];
+            boolean isNameSurnameTaken = clients.stream()
+                    .map(c -> (Client)c)
+                    .anyMatch(c -> c.getName().equals(currentName) && c.getSurname().equals(currentSurname));
+            if (!isNameSurnameTaken) {
+                chosenName = currentName;
+                chosenSurname = currentSurname;
                 break;
             }
         }
-        return client;
+
+        ++currentClientId;
+        return new Client(
+                (Entrance) entrances.get(chosenEntrance),
+                currentClientId,
+                chosenName,
+                chosenSurname,
+                pane
+        );
     }
 
     public List<Entrance> generateEntrances(int entrancesCount) {
@@ -79,75 +71,31 @@ public class SeedingManager implements ISeedingManager {
         return entrances;
     }
 
+    // TODO: Замінити while(true) і CheckPositions() на map.tryAdd()
     private Entrance generateEntrance(int side) {
         Random rand = new Random();
         int x;
-        int y;
-        Entrance entrance;
-        switch (side + 1){
-            case 1:
-                while (true){
-                    boolean flag = false;
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = 0;
-                    if (CheckPositions(x, y)) break;
-                }
-                usedPositions.add(new Point(x, y));
-                entrance = new Entrance(x, y, "Entrance A", pane);
-                return entrance;
-            case 2:
-                while (true){
-                    boolean flag = false;
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = 0;
-                    if (CheckPositions(x, y)) break;
-                }
-                usedPositions.add(new Point(x, y));
-                entrance = new Entrance(x, y, "Entrance B", pane);
-                return entrance;
-            case 3:
-                while (true){
-                    boolean flag = false;
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = MAP_HEIGHT;
-                    if (CheckPositions(x, y)) break;
-                }
-                usedPositions.add(new Point(x, y));
-                entrance = new Entrance(x, y, "Entrance C", pane);
-                return entrance;
-            case 4:
-                while (true){
-                    boolean flag = false;
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = MAP_HEIGHT;
-                    if (CheckPositions(x, y)) break;
-                }
-                usedPositions.add(new Point(x, y));
-                entrance = new Entrance(x, y, "Entrance D", pane);
-                return entrance;
-            case 5:
-                while (true){
-                    boolean flag = false;
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = MAP_HEIGHT;
-                    if (CheckPositions(x, y)) break;
-                }
-                usedPositions.add(new Point(x, y));
-                entrance = new Entrance(x, y, "Entrance E", pane);
-                return entrance;
-            default:
-                entrance = new Entrance(0, 0, "Entrance Default", pane);
-                usedPositions.add(new Point(0, 0));
-                return entrance;
+        int y = 0;
+        while (true) {
+            x = rand.nextInt(0, MAP_WIDTH);
+            if (CheckPositions(x, y)) {
+                break;
+            }
         }
+        usedPositions.add(new Point(x, y));
+        var entrance = new Entrance(x, y, "Entrance " + currentEntranceSymbol, pane);
+        ++currentEntranceSymbol;
+        return entrance;
     }
+
     public List<CashRegistry> generateCashRegistries(int cashRegistriesCount) {
         List<CashRegistry> cashRegistries = new ArrayList<>();
         if(cashRegistriesCount > 5){
             cashRegistriesCount = 5;
         }
         for (int i = 0; i < cashRegistriesCount; ++i) {
-            cashRegistries.add(generateCashRegistry(i));
+            boolean isRight = i > 2;
+            cashRegistries.add(generateCashRegistry(isRight));
         }
         return cashRegistries;
     }
@@ -170,69 +118,23 @@ public class SeedingManager implements ISeedingManager {
             return null;
         }
     }
-    private CashRegistry generateCashRegistry(int side) {
+    private CashRegistry generateCashRegistry(boolean isRight) {
         Random rand = new Random();
-        int x;
+        int x = isRight ? MAP_WIDTH - 20 : 10;
         int y;
-        CashRegistry registry;
-        switch (side + 1){
-            case 1:
-                while (true){
-                    x = 0;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    if (CheckPositions(x, y)) break;
-                }
-                registry = new CashRegistry(x, y, "Cash Registry A", id, pane);
-                usedPositions.add(new Point(x, y));
-                id++;
-                return registry;
-            case 2:
-                while (true){
-                    x = 0;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    if (CheckPositions(x, y)) break;
-                }
-                registry = new CashRegistry(x, y, "Cash Registry B", id, pane);
-                usedPositions.add(new Point(x, y));
-                id++;
-                return registry;
-            case 3:
-                while (true){
-                    x = MAP_WIDTH;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    if (CheckPositions(x, y)) break;
-                }
-                registry = new CashRegistry(x, y, "Cash Registry C", id, pane);
-                usedPositions.add(new Point(x, y));
-                id++;
-                return registry;
-            case 4:
-                while (true){
-                    x = MAP_WIDTH;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    if (CheckPositions(x, y)) break;
-                }
-                registry = new CashRegistry(x, y, "Cash Registry D", id, pane);
-                usedPositions.add(new Point(x, y));
-                id++;
-                return registry;
-            case 5:
-                while (true){
-                    x = MAP_WIDTH;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    if (CheckPositions(x, y)) break;
-                }
-                registry = new CashRegistry(x, y, "Cash Registry E", id, pane);
-                usedPositions.add(new Point(x, y));
-                id++;
-                return registry;
-            default:
-                registry = new CashRegistry(0, 50, "Cash Registry Default", id, pane);
-                usedPositions.add(new Point(0, 50));
-                id++;
-                return registry;
+        while (true) {
+            y = rand.nextInt(0, MAP_WIDTH);
+            if (CheckPositions(x, y)) {
+                break;
+            }
         }
+        usedPositions.add(new Point(x, y));
+        var registry = new CashRegistry(x, y, "Cash Registry " + currentCashRegistrySymbol,
+                currentCashRegistryId, pane);
+        ++currentCashRegistrySymbol;
+        return registry;
     }
+
     private boolean CheckPositions(int x, int y) {
         boolean flag = false;
         for(int i=0; i<usedPositions.size(); ++i){
@@ -240,10 +142,7 @@ public class SeedingManager implements ISeedingManager {
                 flag = true;
             }
         }
-        if(flag == false){
-            return true;
-        }
-        return false;
-    }
 
+        return !flag;
+    }
 }
