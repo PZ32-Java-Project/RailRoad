@@ -155,8 +155,8 @@ public class SeedingManager implements ISeedingManager {
             int y = 0;
             while(true){
                 if(CheckPositions(x, y)) break;
-                x = rand.nextInt(0, MAP_WIDTH);
-                y = 0;
+                x = 0;
+                y = rand.nextInt(0, MAP_HEIGHT);
             }
             usedPositions.add(new Point(x, y));
             ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "ReserveRegistry", 0);
