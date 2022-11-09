@@ -1,16 +1,18 @@
+import managers.SeedingManager;
+import models.CashRegistry;
+import models.Entrance;
 import models.Hall;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        var hall = new Hall();
-        hall.initialize(4,4,1000,5000); // hall.initialize(4,4,-1,-1); для рандому
-        try {
-            Thread.sleep(5000);
-            hall.stop();
-            Thread.sleep(5000);
-            hall.initialize(4,4,1000,5000); // hall.initialize(4,4,-1,-1); для рандому
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        SeedingManager manager = new SeedingManager();
+
+        List<CashRegistry> registryList = manager.generateCashRegistries(4);
+
+        List<Entrance> entrances = manager.generateEntrances(4);
+        int a = 5;
     }
 }

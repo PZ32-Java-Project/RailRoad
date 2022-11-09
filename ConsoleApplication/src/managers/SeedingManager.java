@@ -5,6 +5,7 @@ import abstractions.Position;
 import models.CashRegistry;
 import models.Client;
 import models.Entrance;
+import models.ReserveCashRegistry;
 
 import java.awt.*;
 import java.lang.reflect.Array;
@@ -17,6 +18,9 @@ import static shared.Constants.*;
 // TODO: create some seed data, add factory pattern
 public class SeedingManager implements ISeedingManager {
     private ArrayList<Point> usedPositions;
+
+    private boolean generatedReserveRegistry = false;
+    int ID = 1;
     public SeedingManager(){
         usedPositions = new ArrayList<>();
     }
@@ -62,8 +66,8 @@ public class SeedingManager implements ISeedingManager {
 
     public List<Entrance> generateEntrances(int entrancesCount) {
         List<Entrance> entrances = new ArrayList<>();
-        if(entrancesCount > 4){
-            entrancesCount = 4;
+        if(entrancesCount > 5){
+            entrancesCount = 5;
         }
         for (int i = 0; i < entrancesCount; ++i) {
             entrances.add(generateEntrance(i));
@@ -76,20 +80,13 @@ public class SeedingManager implements ISeedingManager {
         int x;
         int y;
         Entrance entrance;
-        switch (side){
+        switch (side + 1){
             case 1:
                 while (true){
                     boolean flag = false;
                     x = rand.nextInt(0, MAP_WIDTH);
                     y = 0;
-                    for(int i=0; i<usedPositions.size(); ++i){
-                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
-                            flag = true;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
+                    if (CheckPositions(x, y)) break;
                 }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance A");
@@ -98,15 +95,8 @@ public class SeedingManager implements ISeedingManager {
                 while (true){
                     boolean flag = false;
                     x = rand.nextInt(0, MAP_WIDTH);
-                    y = MAP_HEIGHT;
-                    for(int i=0; i<usedPositions.size(); ++i){
-                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
-                            flag = true;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
+                    y = 0;
+                    if (CheckPositions(x, y)) break;
                 }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance B");
@@ -114,16 +104,9 @@ public class SeedingManager implements ISeedingManager {
             case 3:
                 while (true){
                     boolean flag = false;
-                    x = 0;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    for(int i=0; i<usedPositions.size(); ++i){
-                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
-                            flag = true;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = MAP_HEIGHT;
+                    if (CheckPositions(x, y)) break;
                 }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance C");
@@ -131,115 +114,132 @@ public class SeedingManager implements ISeedingManager {
             case 4:
                 while (true){
                     boolean flag = false;
-                    x = MAP_WIDTH;
-                    y = rand.nextInt(0, MAP_HEIGHT);
-                    for(int i=0; i<usedPositions.size(); ++i){
-                        if(x ==usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
-                            flag = true;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = MAP_HEIGHT;
+                    if (CheckPositions(x, y)) break;
                 }
                 usedPositions.add(new Point(x, y));
                 entrance = new Entrance(x, y, "Entrance D");
                 return entrance;
+            case 5:
+                while (true){
+                    boolean flag = false;
+                    x = rand.nextInt(0, MAP_WIDTH);
+                    y = MAP_HEIGHT;
+                    if (CheckPositions(x, y)) break;
+                }
+                usedPositions.add(new Point(x, y));
+                entrance = new Entrance(x, y, "Entrance E");
+                return entrance;
             default:
-                entrance = new Entrance(0, 0, "Entrance E");
+                entrance = new Entrance(0, 0, "Entrance Default");
                 usedPositions.add(new Point(0, 0));
                 return entrance;
         }
     }
-
     public List<CashRegistry> generateCashRegistries(int cashRegistriesCount) {
         List<CashRegistry> cashRegistries = new ArrayList<>();
-        if(cashRegistriesCount > 4){
-            cashRegistriesCount = 4;
+        if(cashRegistriesCount > 5){
+            cashRegistriesCount = 5;
         }
         for (int i = 0; i < cashRegistriesCount; ++i) {
-            cashRegistries.add(generateCashRegistry(i, (i+1)));
+            cashRegistries.add(generateCashRegistry(i));
         }
         return cashRegistries;
     }
 
-    private CashRegistry generateCashRegistry(int side, int ID) {
+    public ReserveCashRegistry generateReserveCashRegistry(){
+        if(generatedReserveRegistry == false){
+            Random rand = new Random();
+            int x = rand.nextInt(0, MAP_WIDTH);
+            int y = 0;
+            while(true){
+                if(CheckPositions(x, y)) break;
+                x = rand.nextInt(0, MAP_WIDTH);
+                y = 0;
+            }
+            usedPositions.add(new Point(x, y));
+            ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "ReserveRegistry", 0);
+
+            return cashRegistry;
+        }else{
+            return null;
+        }
+    }
+    private CashRegistry generateCashRegistry(int side) {
         Random rand = new Random();
         int x;
         int y;
         CashRegistry registry;
-        switch (side){
+        switch (side + 1){
             case 1:
-                while (true){
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = 0;
-                    boolean flag = false;
-                    for (int i=0; i<usedPositions.size(); ++i){
-                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
-                }
-                registry = new CashRegistry(x, y, "Cash Registry A", ID);
-                return registry;
-            case 2:
-                while (true){
-                    x = rand.nextInt(0, MAP_WIDTH);
-                    y = MAP_HEIGHT;
-                    boolean flag = false;
-                    for (int i=0; i<usedPositions.size(); ++i){
-                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
-                }
-                registry = new CashRegistry(x, y, "Cash Registry B", ID);
-                return registry;
-            case 3:
                 while (true){
                     x = 0;
                     y = rand.nextInt(0, MAP_HEIGHT);
-                    boolean flag = false;
-                    for (int i=0; i<usedPositions.size(); ++i){
-                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
+                    if (CheckPositions(x, y)) break;
+                }
+                registry = new CashRegistry(x, y, "Cash Registry A", ID);
+                usedPositions.add(new Point(x, y));
+                ID++;
+                return registry;
+            case 2:
+                while (true){
+                    x = 0;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    if (CheckPositions(x, y)) break;
+                }
+                registry = new CashRegistry(x, y, "Cash Registry B", ID);
+                usedPositions.add(new Point(x, y));
+                ID++;
+                return registry;
+            case 3:
+                while (true){
+                    x = MAP_WIDTH;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    if (CheckPositions(x, y)) break;
                 }
                 registry = new CashRegistry(x, y, "Cash Registry C", ID);
+                usedPositions.add(new Point(x, y));
+                ID++;
                 return registry;
             case 4:
                 while (true){
                     x = MAP_WIDTH;
                     y = rand.nextInt(0, MAP_HEIGHT);
-                    boolean flag = false;
-                    for (int i=0; i<usedPositions.size(); ++i){
-                        if(usedPositions.get(i).x == x && usedPositions.get(i).y == y){
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if(flag == false){
-                        break;
-                    }
+                    if (CheckPositions(x, y)) break;
                 }
                 registry = new CashRegistry(x, y, "Cash Registry D", ID);
+                usedPositions.add(new Point(x, y));
+                ID++;
+                return registry;
+            case 5:
+                while (true){
+                    x = MAP_WIDTH;
+                    y = rand.nextInt(0, MAP_HEIGHT);
+                    if (CheckPositions(x, y)) break;
+                }
+                registry = new CashRegistry(x, y, "Cash Registry E", ID);
+                usedPositions.add(new Point(x, y));
+                ID++;
                 return registry;
             default:
-                registry = new CashRegistry(1, 0, "Cash Registry E", ID);
+                registry = new CashRegistry(0, 50, "Cash Registry Default", ID);
+                usedPositions.add(new Point(0, 50));
+                ID++;
                 return registry;
         }
     }
+    private boolean CheckPositions(int x, int y) {
+        boolean flag = false;
+        for(int i=0; i<usedPositions.size(); ++i){
+            if(x == usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
+                flag = true;
+            }
+        }
+        if(flag == false){
+            return true;
+        }
+        return false;
+    }
+
 }
