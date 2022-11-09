@@ -12,7 +12,7 @@ public class Constants {
     public static int cashRegistryServeTime;
     public static int spawnInterval;
 
-    public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmitriy", "Halina",
+    public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmytro", "Halina",
             "Maria", "Olena", "Olexander", "Denis", "Maxim"};
     public static final String[] surnames = {"Zelen", "Crow", "Horseshoe", "Dragonite", "April", "Ash", "Haine", "Hale"};
 }

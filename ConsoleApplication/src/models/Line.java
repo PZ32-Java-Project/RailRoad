@@ -29,4 +29,8 @@ public class Line {
     public void setClients(Queue<Client> clients) {
         this.clients = clients;
     }
+
+    public void tryDelete(){
+        clients.remove();
+    }
 }

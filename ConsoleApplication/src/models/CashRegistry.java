@@ -3,10 +3,10 @@ package models;
 import abstractions.Position;
 
 public class CashRegistry extends Position {
-    private String name;
-    private Line line;
-    private int ID;
-    private boolean onPause;
+    protected String name;
+    protected Line line;
+    protected int ID;
+    protected boolean onPause;
 
     public CashRegistry(int x, int y, String name, int ID) {
         super(x, y);
