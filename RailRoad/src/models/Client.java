@@ -17,12 +17,15 @@ public class Client extends Position {
     private Circle clientCircle;
     private Pane pane;
 
-    public Client(Entrance entrance, int id, String name, String surname, Pane pane) {
+    private ClientTypes priority;
+
+    public Client(Entrance entrance, int id, String name, String surname, Pane pane, ClientTypes priority) {
         super(entrance.getX(), entrance.getY());
         this.name = name;
         this.surname = surname;
         this.id = id;
         this.pane = pane;
+        this.priority = priority;
         generateTickets();
     }
     private void generateTickets() {
@@ -92,4 +95,15 @@ public class Client extends Position {
     */
 
     //endregion
+    public enum ClientTypes{
+        Disabled(0),
+        WithBaby(1),
+        Veteran(2),
+        Ordinary(3);
+        public final int priority;
+        private ClientTypes(int priority) {
+            this.priority = priority;
+        }
+    }
 }
+
