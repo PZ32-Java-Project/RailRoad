@@ -1,6 +1,5 @@
 package models;
 
-import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -65,13 +64,18 @@ public class Client extends Position {
         this.ticketsCount = ticketsCount;
     }
 
-    public void clientUI()
+    public void updateUI()
     {
-        this.clientCircle = new Circle(5, Color.BLUE);
+        if (clientCircle != null) {
+            pane.getChildren().remove(clientCircle);
+        }
+
+        clientCircle = new Circle(5, Color.BLUE);
         clientCircle.setStroke(Color.BLUE);
         clientCircle.setTranslateX(this.getX());
         clientCircle.setTranslateY(this.getY());
         clientCircle.setFill(Color.BLUE);
+
         pane.getChildren().add(clientCircle);
     }
 

@@ -8,18 +8,30 @@ public abstract class Position {
         this.x = x;
         this.y = y;
     }
+
     public void moveTo(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     public boolean isPosition(Position position) {
         return this.x == position.x && this.y == position.y;
     }
+
     public int getX(){
         return x;
     }
+
     public int getY(){
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     // TODO: move to a new manager?
@@ -28,6 +40,7 @@ public abstract class Position {
     }
 
     public abstract String getData();
+
     public Position getPosition(){
         return this;
     }

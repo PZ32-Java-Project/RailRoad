@@ -8,6 +8,7 @@ import managers.SeedingManager;
 import models.CashRegistry;
 import models.Client;
 import models.Hall;
+import models.Map;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,32 +31,32 @@ public class ClientsSpawner extends Thread{
     }
 
     public void run() {
-        var map = hall.getMap();
+        var map = Map.getInstance();
         boolean enableSpawning = true;
         while(true) {
             try {
                 lock.lock();
                 int clientsCount = map.getClients().size();
                 int clientsLimit = LINE_MAX_CLIENTS_COUNT*map.getCashRegistries().size();
-                //int clientsLimit = LINE_MAX_CLIENTS_COUNT * 2;
                 if (clientsCount >= clientsLimit)
                     enableSpawning=false;
                 else if(clientsCount<clientsLimit*0.7)
                     enableSpawning = true;
                 if (enableSpawning) {
-                    List<Position> cashRegistries = hall.getMap().getCashRegistries();
+                    var cashRegistries = map.getCashRegistries();
                     var clientsList = map.getClients();
                     var entrancesList = map.getEntrances();
                     var client =  seedingManager.generateClient(clientsList,entrancesList);
-                    Platform.runLater(() -> {
-                        client.clientUI();
-                    });
+                    Platform.runLater(() -> client.updateUI());
                     Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
                     var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
+                    moveClient(client, cashRegistry);
+                    /*
                     map.getPositions().add(client);
                     var cashLine = cashRegistry.getLine();
                     cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
+                     */
                     System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
                 }
             }
@@ -83,6 +84,12 @@ public class ClientsSpawner extends Thread{
             }
         }
     }
+
+    private void moveClient(Client client, CashRegistry cashRegistry) {
+        var clientMover = new ClientMover(client, cashRegistry);
+        clientMover.run();
+    }
+
     public Optional<CashRegistry> findCashRegistry(List<Position> cashRegistries, Client client){
         List<CashRegistry> cashRegistriesList = (List<CashRegistry>)(List<?>) cashRegistries;
         Optional<CashRegistry> result  = cashRegistriesList.stream().filter(c->c.isOnPause()==false).min((i, j) -> {

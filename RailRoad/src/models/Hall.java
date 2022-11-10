@@ -48,10 +48,6 @@ public class Hall {
     }
 
     public void spawnClients(Lock lock) {
-        /*for (Position pos : map.getClients()) {
-            Client newClient = (Client)pos;
-            newClient.clientUI();
-        }*/
         var thread = new ClientsSpawner(this, lock, spawnInterval, pane); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
         thread.start();
     }
