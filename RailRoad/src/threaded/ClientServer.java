@@ -62,6 +62,7 @@ public class ClientServer extends Thread{
                     finally {
                         lock.unlock();
                     }
+                    //coef1 = (y3 - y2) / (x3 - x2);
                 }
             }
             try {

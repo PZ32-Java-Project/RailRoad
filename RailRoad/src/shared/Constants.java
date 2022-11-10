@@ -11,6 +11,10 @@ public class Constants {
     public static int cashRegistriesCount;
     public static int cashRegistryServeTime;
     public static int spawnInterval;
+    public static int clientSize = 4;
+    public static int cashRegistryHeight = 10;
+    public static int cashRegistryWidth = 10;
+    public static int entranceSize = 10;
 
     public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmytro", "Halina",
             "Maria", "Olena", "Olexander", "Denis", "Maxim"};

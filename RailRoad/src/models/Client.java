@@ -7,6 +7,8 @@ import abstractions.Position;
 import shared.Constants;
 import java.util.Random;
 
+import static shared.Constants.clientSize;
+
 public class Client extends Position {
     private String name;
     private String surname;
@@ -43,10 +45,7 @@ public class Client extends Position {
         return surname;
     }
 
-    @Override
-    public String getData() {
-        return this.toString();
-    }
+
 
     public void setName(String name) {
         this.name = name;

@@ -25,7 +25,6 @@ public abstract class Position {
     public int getY(){
         return y;
     }
-
     public void setX(int x) {
         this.x = x;
     }
@@ -39,7 +38,6 @@ public abstract class Position {
         return Math.sqrt((this.x - position.x) * (this.x - position.x) + (this.y - position.y) * (this.y - position.y));
     }
 
-    public abstract String getData();
 
     public Position getPosition(){
         return this;

@@ -7,6 +7,8 @@ import abstractions.Position;
 
 import java.awt.*;
 
+import static shared.Constants.*;
+
 public class CashRegistry extends Position {
     private Rectangle cash_reg;
     protected String name;
@@ -21,8 +23,8 @@ public class CashRegistry extends Position {
         line = new Line(id);
         onPause = false;
         this.cash_reg = new Rectangle();
-        cash_reg.setHeight(10);
-        cash_reg.setWidth(10);
+        cash_reg.setHeight(cashRegistryHeight);
+        cash_reg.setWidth(cashRegistryWidth);
         cash_reg.setStroke(Color.GREEN);
         cash_reg.setTranslateX(x);
         cash_reg.setTranslateY(y);
@@ -35,12 +37,6 @@ public class CashRegistry extends Position {
         this.name = name;
         this.line = line;
     }
-
-    @Override
-    public String getData() {
-        return this.toString();
-    }
-
     public Line getLine() {
         return line;
     }
@@ -62,7 +58,20 @@ public class CashRegistry extends Position {
             cash_reg.setFill(Color.GREEN);
         }
     }
+    public ConcretePosition findVacantPosition (){
 
+        int lineSize = this.line.getClients().size();
+        int y = (this.getY());
+        int x;
+        if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
+            x= (getX() + lineSize * (clientSize + 2) + clientSize + cashRegistryWidth);
+        }
+        else {
+            x = (getX() - lineSize * (clientSize +2) - (clientSize + cashRegistryWidth));
+        }
+        System.out.println(this.name+": "+ x+", "+y);
+        return new ConcretePosition(x,y);
+    }
     public String getName() {
         return name;
     }
