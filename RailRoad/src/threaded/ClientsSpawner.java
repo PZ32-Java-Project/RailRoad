@@ -48,7 +48,7 @@ public class ClientsSpawner extends Thread{
                     var entrancesList = map.getEntrances();
                     var client =  seedingManager.generateClient(clientsList,entrancesList);
                     Platform.runLater(() -> {
-                        client.clientUI();
+                        client.updateUI();
                     });
                     Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
                     var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
@@ -56,6 +56,7 @@ public class ClientsSpawner extends Thread{
                     var cashLine = cashRegistry.getLine();
                     cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
+                    cashRegistry.findVacantPosition();
                     System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
                 }
             }

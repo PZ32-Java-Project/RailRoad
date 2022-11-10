@@ -1,12 +1,13 @@
 package models;
 
-import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import abstractions.Position;
 import shared.Constants;
 import java.util.Random;
+
+import static shared.Constants.clientSize;
 
 public class Client extends Position {
     private String name;
@@ -44,10 +45,7 @@ public class Client extends Position {
         return surname;
     }
 
-    @Override
-    public String getData() {
-        return this.toString();
-    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -65,9 +63,9 @@ public class Client extends Position {
         this.ticketsCount = ticketsCount;
     }
 
-    public void clientUI()
+    public void updateUI()
     {
-        this.clientCircle = new Circle(5, Color.BLUE);
+        this.clientCircle = new Circle(clientSize, Color.BLUE);
         clientCircle.setStroke(Color.BLUE);
         clientCircle.setTranslateX(this.getX());
         clientCircle.setTranslateY(this.getY());

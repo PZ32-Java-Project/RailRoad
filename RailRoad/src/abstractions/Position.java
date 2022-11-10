@@ -21,13 +21,19 @@ public abstract class Position {
     public int getY(){
         return y;
     }
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y){
+        this.y = y;
+    }
 
     // TODO: move to a new manager?
     public double getDistance(Position position) {
         return Math.sqrt((this.x - position.x) * (this.x - position.x) + (this.y - position.y) * (this.y - position.y));
     }
 
-    public abstract String getData();
+
     public Position getPosition(){
         return this;
     }

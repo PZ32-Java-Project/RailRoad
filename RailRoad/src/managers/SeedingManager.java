@@ -103,12 +103,12 @@ public class SeedingManager implements ISeedingManager {
     public ReserveCashRegistry generateReserveCashRegistry(){
         if(generatedReserveRegistry == false){
             Random rand = new Random();
-            int x = rand.nextInt(10, MAP_WIDTH - 10);
+            int x = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
             int y = 0;
             while(true){
                 if(CheckPositions(x, y)) break;
                 x = 0;
-                y = rand.nextInt(10, MAP_HEIGHT - 10);
+                y = rand.nextInt(cashRegistryWidth, MAP_HEIGHT - cashRegistryWidth);
             }
             usedPositions.add(new Point(x, y));
             ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "ReserveRegistry", 0, pane);
@@ -120,10 +120,10 @@ public class SeedingManager implements ISeedingManager {
     }
     private CashRegistry generateCashRegistry(boolean isRight) {
         Random rand = new Random();
-        int x = isRight ? MAP_WIDTH - 20 : 10;
+        int x = isRight ? MAP_WIDTH - cashRegistryWidth*2 : cashRegistryWidth;
         int y;
         while (true) {
-            y = rand.nextInt(10, MAP_WIDTH - 10);
+            y = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
             if (CheckPositions(x, y)) {
                 break;
             }

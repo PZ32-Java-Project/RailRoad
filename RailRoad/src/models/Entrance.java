@@ -6,6 +6,8 @@ import javafx.scene.shape.Circle;
 
 import abstractions.Position;
 
+import static shared.Constants.entranceSize;
+
 public class Entrance extends Position {
     private String name;
     private Circle entranceCircle;
@@ -13,16 +15,11 @@ public class Entrance extends Position {
     public Entrance(int x, int y, String name, Pane pane) {
         super(x, y);
         this.name = name;
-        this.entranceCircle = new Circle(10, Color.ORANGE);
+        this.entranceCircle = new Circle(entranceSize, Color.ORANGE);
         entranceCircle.setStroke(Color.WHITE);
         entranceCircle.setTranslateX(this.getX());
         entranceCircle.setTranslateY(this.getY());
         entranceCircle.setFill(Color.WHITE);
         pane.getChildren().add(entranceCircle);
-    }
-
-    @Override
-    public String getData() {
-        return null;
     }
 }
