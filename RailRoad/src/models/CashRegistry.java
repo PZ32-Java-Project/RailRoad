@@ -9,6 +9,7 @@ import threaded.ClientMover;
 import java.awt.*;
 
 import static shared.Constants.*;
+import static shared.MyFileWritter.Write;
 
 public class CashRegistry extends Position {
     private Rectangle cash_reg;
@@ -70,7 +71,7 @@ public class CashRegistry extends Position {
         else {
             x = (getX() - lineSize * (clientSize * 2 +2) - (clientSize + cashRegistryWidth));
         }
-        System.out.println(this.name+": "+ x+", "+y);
+        Write(this.name+": "+ x+", "+y);
         return new ConcretePosition(x,y);
     }
     public void moveLine(){
@@ -82,7 +83,7 @@ public class CashRegistry extends Position {
         else {
             offsetX = - clientSize * 2 - 2;
         }
-        System.out.println(this.name+": "+ offsetX +", "+y);
+       Write(this.name+": "+ offsetX +", "+y);
         var clientsList = line.getClients();
 
 

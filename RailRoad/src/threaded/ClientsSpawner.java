@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.concurrent.locks.Lock;
 
 import static shared.Constants.LINE_MAX_CLIENTS_COUNT;
+import static shared.MyFileWritter.Write;
 
 public class ClientsSpawner extends Thread{
     private Hall hall;
@@ -53,14 +54,15 @@ public class ClientsSpawner extends Thread{
                     var cashLine = cashRegistry.getLine();
                     var result = cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
-                    System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+                    System.out.println("client " + client.getName() +" ID: "+client.getId()+" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+                    Write("client " + client.getName() +" ID: "+client.getId()+" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
                 }
             }
             finally {
                 lock.unlock();
                 try {
                     if(hall.isTerminate()){
-                        System.out.println("Spawner has stopped");
+                        Write("Spawner has stopped");
                         return;
                     }
                     if(interval==-1) {
@@ -71,7 +73,7 @@ public class ClientsSpawner extends Thread{
                         sleep(interval);
                     }
                     if(hall.isTerminate()){
-                        System.out.println("Spawner has stopped");
+                        Write("Spawner has stopped");
                         return;
                     }
                 } catch (InterruptedException e) {

@@ -7,6 +7,8 @@ import models.Hall;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
+import static shared.MyFileWritter.Write;
+
 public class ClientServer extends Thread{
     private CashRegistry cashRegistry;
     private Hall hall;
@@ -35,7 +37,7 @@ public class ClientServer extends Thread{
                 if (isNotEmpty) {
                     try {
                         if(hall.isTerminate()){
-                            System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
+                            Write("ClientServer "+ cashRegistry.getId() +" has stopped");
                             return;
                         }
                         if(interval==-1) {
@@ -46,7 +48,7 @@ public class ClientServer extends Thread{
                             sleep(interval);
                         }
                         if(hall.isTerminate()){
-                            System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
+                            Write("ClientServer "+ cashRegistry.getId() +" has stopped");
                             return;
                         }
                     } catch (InterruptedException e) {
@@ -61,7 +63,8 @@ public class ClientServer extends Thread{
                         cashRegistry.moveLine();
                         //Dodo:    Зробити біг на вихід
                         Platform.runLater(() -> client.remove());
-                        System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
+                        System.out.println("client " + client.getName() + " ID: "+client.getId()+" served at cash registry :" + cashRegistry.getName());
+                        Write("client " + client.getName() +" ID: "+client.getId()+ " served at cash registry :" + cashRegistry.getName());
                     }
                     finally {
                         lock.unlock();
