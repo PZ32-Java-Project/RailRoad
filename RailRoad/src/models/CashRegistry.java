@@ -80,7 +80,7 @@ public class CashRegistry extends Position {
             offsetX = clientSize * 2 + 2 ;
         }
         else {
-            offsetX = -clientSize * 2 + 2;
+            offsetX = - clientSize * 2 - 2;
         }
         System.out.println(this.name+": "+ offsetX +", "+y);
         var clientsList = line.getClients();

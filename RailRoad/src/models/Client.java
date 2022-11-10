@@ -27,11 +27,7 @@ public class Client extends Position {
     }
     private void generateTickets() {
         var random = new Random();
-        ticketsCount = random.nextInt(Constants.CLIENT_MAX_TICKETS_COUNT);
-        ++ticketsCount;
-    }
-    public void MoveTo(Position position){
-
+        ticketsCount = random.nextInt(Constants.CLIENT_MAX_TICKETS_COUNT)+1;
     }
     //region GetSet
     public int getId(){

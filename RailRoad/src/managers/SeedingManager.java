@@ -32,7 +32,6 @@ public class SeedingManager implements ISeedingManager {
     }
 
     public Client generateClient(List<Position> clients, List<Position> entrances) {
-        Client client;
         Random rand = new Random();
         int chosenEntrance = rand.nextInt(0, entrances.size());
         String chosenName;
