@@ -1,6 +1,7 @@
 package models;
 
 import abstractions.Position;
+import javafx.geometry.Pos;
 import shared.Constants;
 
 import java.util.ArrayList;
@@ -55,5 +56,9 @@ public class Map {
     @Override
     public String toString() {
         return "";
+    }
+
+    public void removeAt(Position position) {
+        positions.remove(position);
     }
 }

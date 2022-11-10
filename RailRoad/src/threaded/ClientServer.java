@@ -1,5 +1,6 @@
 package threaded;
 
+import javafx.application.Platform;
 import models.CashRegistry;
 import models.Hall;
 
@@ -57,12 +58,12 @@ public class ClientServer extends Thread{
                         var client = line.getClients().poll();
                         var pos = map.getPositions();
                         var res = pos.remove(client);
+                        Platform.runLater(() -> client.remove());
                         System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
                     }
                     finally {
                         lock.unlock();
                     }
-                    //coef1 = (y3 - y2) / (x3 - x2);
                 }
             }
             try {

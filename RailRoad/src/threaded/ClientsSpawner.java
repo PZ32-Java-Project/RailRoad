@@ -51,12 +51,10 @@ public class ClientsSpawner extends Thread{
                     Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
                     var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
                     moveClient(client, cashRegistry);
-                    /*
                     map.getPositions().add(client);
                     var cashLine = cashRegistry.getLine();
-                    cashLine.tryAdd(client);
+                    var result = cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
-                     */
                     System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
                 }
             }
@@ -86,7 +84,8 @@ public class ClientsSpawner extends Thread{
     }
 
     private void moveClient(Client client, CashRegistry cashRegistry) {
-        var clientMover = new ClientMover(client, cashRegistry);
+        var clientTargetPosition = cashRegistry.findVacantPosition();
+        var clientMover = new ClientMover(client, clientTargetPosition);
         clientMover.run();
     }
 

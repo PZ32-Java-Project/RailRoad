@@ -22,9 +22,9 @@ public class ClientMover extends Thread{
             makeStep();
             Platform.runLater(() -> client.updateUI());
 
-            // Sleep 0.05 second
+            // Sleep 0.005 second
             try {
-                sleep(50);
+                sleep(5);
             } catch (InterruptedException e) {
                 System.out.println("Error while trying to move a client: ");
                 e.printStackTrace();

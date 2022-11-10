@@ -78,6 +78,15 @@ public class Client extends Position {
         pane.getChildren().add(clientCircle);
     }
 
+    public void remove() {
+        if (clientCircle != null) {
+            pane.getChildren().remove(clientCircle);
+        }
+
+        var map = Map.getInstance();
+        map.removeAt(this);
+    }
+
     /*
     @Override
     protected Long call() throws Exception {
