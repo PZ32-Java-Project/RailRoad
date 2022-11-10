@@ -16,6 +16,6 @@ public class RailRoadController {
     {
         // Platform.setImplicitExit(false);
         hall = new Hall(pane);
-        hall.initialize(5, 2, -1, -1);
+        hall.initialize(5, 2, 500, -1);
     }
 }

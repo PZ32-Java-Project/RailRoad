@@ -5,6 +5,9 @@ import shared.Constants;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static shared.Constants.cashRegistryWidth;
+import static shared.Constants.clientSize;
+
 public class Line {
     private int id;
     private Queue<Client> clients;
@@ -12,6 +15,7 @@ public class Line {
         this.id = id;
         clients = new LinkedList<>();
     }
+
     public boolean tryAdd(Client client) {
         // If line is maxed
         if (clients.size() == Constants.LINE_MAX_CLIENTS_COUNT) {
@@ -31,4 +35,5 @@ public class Line {
     public void tryDelete(){
         clients.remove();
     }
+
 }

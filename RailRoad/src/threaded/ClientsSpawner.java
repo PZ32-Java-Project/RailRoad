@@ -10,9 +10,7 @@ import models.Client;
 import models.Hall;
 import models.Map;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 
 import static shared.Constants.LINE_MAX_CLIENTS_COUNT;
@@ -91,15 +89,16 @@ public class ClientsSpawner extends Thread{
 
     public Optional<CashRegistry> findCashRegistry(List<Position> cashRegistries, Client client){
         List<CashRegistry> cashRegistriesList = (List<CashRegistry>)(List<?>) cashRegistries;
-        Optional<CashRegistry> result  = cashRegistriesList.stream().filter(c->c.isOnPause()==false).min((i, j) -> {
-            var cr1 = (Integer)(i.getLine().getClients().size());
-            var cr2 = j.getLine().getClients().size();
+        var minLineSize =  (cashRegistries.stream().map(c->((CashRegistry)c).getLine().getClients().size())
+                .min(Comparator.naturalOrder()))
+                .stream().findFirst().orElse(0);
+        var closestCash  = cashRegistriesList.stream()
+                .filter(c->!c.isOnPause()&&c.getLine().getClients().size() == minLineSize);
+        var closestVacantCash =  (closestCash.min((i, j) -> {
+            var cr1 = (Double)(client.getDistance(i.getPosition()));
+            var cr2 = (Double)(client.getDistance(j.getPosition()));
             return  cr1.compareTo(cr2);
-        }).stream().min((i, j) -> {
-            var cr1 = (Double)client.getDistance(i.getPosition());
-            var cr2 = client.getDistance(j.getPosition());
-            return  cr1.compareTo(cr2);
-        });
-        return result;
+        }));
+        return closestVacantCash;
     }
 }

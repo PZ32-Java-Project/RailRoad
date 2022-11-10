@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import abstractions.Position;
+import threaded.ClientMover;
 
 import java.awt.*;
 
@@ -64,13 +65,32 @@ public class CashRegistry extends Position {
         int y = (this.getY());
         int x;
         if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
-            x= (getX() + lineSize * (clientSize + 2) + clientSize + cashRegistryWidth);
+            x= (getX() + lineSize * (clientSize * 2 + 2) + clientSize + cashRegistryWidth);
         }
         else {
-            x = (getX() - lineSize * (clientSize +2) - (clientSize + cashRegistryWidth));
+            x = (getX() - lineSize * (clientSize * 2 +2) - (clientSize + cashRegistryWidth));
         }
         System.out.println(this.name+": "+ x+", "+y);
         return new ConcretePosition(x,y);
+    }
+    public void moveLine(){
+        int y = (this.getY());
+        int offsetX;
+        if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
+            offsetX = clientSize * 2 + 2 ;
+        }
+        else {
+            offsetX = -clientSize * 2 + 2;
+        }
+        System.out.println(this.name+": "+ offsetX +", "+y);
+        var clientsList = line.getClients();
+
+
+        for (var client:clientsList) {
+            var targetPosition = new ConcretePosition(client.getX() - offsetX, client.getY());
+            var clientMover  = new ClientMover(client, targetPosition);
+            clientMover.run();
+        }
     }
     public String getName() {
         return name;
