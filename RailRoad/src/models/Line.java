@@ -1,8 +1,10 @@
 package models;
 
+import managers.PriorityComparator;
 import shared.Constants;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import static shared.Constants.cashRegistryWidth;
@@ -11,9 +13,10 @@ import static shared.Constants.clientSize;
 public class Line {
     private int id;
     private Queue<Client> clients;
+    private static PriorityComparator comparator = new PriorityComparator();
     public Line(int id){
         this.id = id;
-        clients = new LinkedList<>();
+        clients = new PriorityQueue<>(comparator);
     }
 
     public boolean tryAdd(Client client) {

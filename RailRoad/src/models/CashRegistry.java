@@ -6,8 +6,6 @@ import javafx.scene.paint.Color;
 import abstractions.Position;
 import threaded.ClientMover;
 
-import java.awt.*;
-
 import static shared.Constants.*;
 
 public class CashRegistry extends Position {
@@ -16,7 +14,6 @@ public class CashRegistry extends Position {
     protected Line line;
     protected int id;
     protected boolean onPause;
-
     public CashRegistry(int x, int y, String name, int id, Pane hall) {
         super(x, y);
         this.name = name;
@@ -32,24 +29,32 @@ public class CashRegistry extends Position {
         cash_reg.setFill(Color.GREEN);
         hall.getChildren().add(cash_reg);
     }
-
     public CashRegistry(int x, int y, String name, Line line) {
         super(x, y);
         this.name = name;
         this.line = line;
     }
+
     public Line getLine() {
         return line;
     }
-
     public void setLine(Line line) {
         this.line = line;
     }
-
     public boolean isOnPause() {
         return onPause;
     }
-
+    private ConcretePosition findVacant(int positionInLine){
+        int y = (getY() + cashRegistryHeight / 2);
+        int x;
+        if(getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
+            x = (getX() + positionInLine * (clientSize * 3) + clientSize + cashRegistryWidth * 2);
+        }
+        else {
+            x = (getX() - positionInLine * (clientSize * 3) - (clientSize + cashRegistryWidth));
+        }
+        return new ConcretePosition(x,y);
+    }
     public void setOnPause(boolean onPause) {
         this.onPause = onPause;
         if (this.onPause) {
@@ -59,51 +64,29 @@ public class CashRegistry extends Position {
             cash_reg.setFill(Color.GREEN);
         }
     }
-    public ConcretePosition findVacantPosition (){
-
-        int lineSize = this.line.getClients().size();
-        int y = (this.getY());
-        int x;
-        if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
-            x= (getX() + lineSize * (clientSize * 2 + 2) + clientSize + cashRegistryWidth);
-        }
-        else {
-            x = (getX() - lineSize * (clientSize * 2 +2) - (clientSize + cashRegistryWidth));
-        }
-        System.out.println(this.name+": "+ x+", "+y);
-        return new ConcretePosition(x,y);
+    public ConcretePosition findVacantPositionOnTail(){
+        int lineSize = line.getClients().size();
+        return findVacant(lineSize);
     }
-    public void moveLine(){
-        int y = (this.getY());
-        int offsetX;
-        if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
-            offsetX = clientSize * 2 + 2 ;
-        }
-        else {
-            offsetX = - clientSize * 2 - 2;
-        }
-        System.out.println(this.name+": "+ offsetX +", "+y);
-        var clientsList = line.getClients();
-
-
-        for (var client:clientsList) {
-            var targetPosition = new ConcretePosition(client.getX() - offsetX, client.getY());
+    public void updatetLineUI(){
+      //  int lineSize = line.getClients().size();
+        int i=0;
+        for (var client:line.getClients()){
+            var targetPosition =  findVacant(i);
             var clientMover  = new ClientMover(client, targetPosition);
-            clientMover.run();
+            i++;
+            clientMover.start();
         }
     }
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }

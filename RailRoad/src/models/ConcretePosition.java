@@ -8,5 +8,4 @@ public class ConcretePosition extends Position {
     public ConcretePosition(int x, int y){
         super(x,y);
     }
-
 }

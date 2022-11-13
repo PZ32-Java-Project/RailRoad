@@ -11,7 +11,6 @@ import static shared.Constants.entranceSize;
 public class Entrance extends Position {
     private String name;
     private Circle entranceCircle;
-
     public Entrance(int x, int y, String name, Pane pane) {
         super(x, y);
         this.name = name;

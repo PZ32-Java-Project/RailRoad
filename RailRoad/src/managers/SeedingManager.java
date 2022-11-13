@@ -3,10 +3,7 @@ package managers;
 import abstractions.ISeedingManager;
 import abstractions.Position;
 import javafx.scene.layout.Pane;
-import models.CashRegistry;
-import models.Client;
-import models.Entrance;
-import models.ReserveCashRegistry;
+import models.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,7 +17,6 @@ public class SeedingManager implements ISeedingManager {
     private List<Point> usedPositions;
     private boolean generatedReserveRegistry = false;
     private Pane pane;
-
     private static int currentClientId = 0;
     private static int currentCashRegistryId = 0;
     private static char currentEntranceSymbol = 'A';
@@ -31,7 +27,7 @@ public class SeedingManager implements ISeedingManager {
         this.pane = pane;
     }
 
-    public Client generateClient(List<Position> clients, List<Position> entrances) {
+    public Client generateClient(List<Position> clients, List<Position> entrances){
         Random rand = new Random();
         int chosenEntrance = rand.nextInt(0, entrances.size());
         String chosenName;
@@ -48,14 +44,21 @@ public class SeedingManager implements ISeedingManager {
                 break;
             }
         }
-
         ++currentClientId;
+        var chance = rand.nextInt(5);
+        ClientTypes type = ClientTypes.Ordinary;
+        ClientTypes[] EnumValues = ClientTypes.values();
+        System.out.println(chance);
+        if(chance==0){
+            type = EnumValues[rand.nextInt(ClientTypes.values().length-1)];
+        }
         return new Client(
-                (Entrance) entrances.get(chosenEntrance),
-                currentClientId,
-                chosenName,
-                chosenSurname,
-                pane
+            (Entrance) entrances.get(chosenEntrance),
+            currentClientId,
+            chosenName,
+            chosenSurname,
+            type,
+            pane
         );
     }
 
@@ -117,6 +120,7 @@ public class SeedingManager implements ISeedingManager {
             return null;
         }
     }
+
     private CashRegistry generateCashRegistry(boolean isRight) {
         Random rand = new Random();
         int x = isRight ? MAP_WIDTH - cashRegistryWidth*2 : cashRegistryWidth;
@@ -136,8 +140,8 @@ public class SeedingManager implements ISeedingManager {
 
     private boolean CheckPositions(int x, int y) {
         boolean flag = false;
-        for(int i=0; i<usedPositions.size(); ++i){
-            if(x == usedPositions.get(i).getX() && y == usedPositions.get(i).getY()){
+        for (Point usedPosition : usedPositions) {
+            if (x == usedPosition.getX() && y == usedPosition.getY()) {
                 flag = true;
             }
         }
