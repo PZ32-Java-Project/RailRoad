@@ -7,7 +7,6 @@ import abstractions.Position;
 import threaded.ClientMover;
 
 import static shared.Constants.*;
-import static shared.MyFileWritter.Write;
 
 public class CashRegistry extends Position {
     private Rectangle cash_reg;
@@ -65,37 +64,6 @@ public class CashRegistry extends Position {
             cash_reg.setFill(Color.GREEN);
         }
     }
-<<<<<<< HEAD
-    public ConcretePosition findVacantPosition (){
-
-        int lineSize = this.line.getClients().size();
-        int y = (this.getY());
-        int x;
-        if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
-            x= (getX() + lineSize * (clientSize * 2 + 2) + clientSize + cashRegistryWidth);
-        }
-        else {
-            x = (getX() - lineSize * (clientSize * 2 +2) - (clientSize + cashRegistryWidth));
-        }
-        Write(this.name+": "+ x+", "+y);
-        return new ConcretePosition(x,y);
-    }
-    public void moveLine(){
-        int y = (this.getY());
-        int offsetX;
-        if(this.getX() == cashRegistryWidth){ // крива перевірка на ліву-праву касу
-            offsetX = clientSize * 2 + 2 ;
-        }
-        else {
-            offsetX = - clientSize * 2 - 2;
-        }
-       Write(this.name+": "+ offsetX +", "+y);
-        var clientsList = line.getClients();
-
-
-        for (var client:clientsList) {
-            var targetPosition = new ConcretePosition(client.getX() - offsetX, client.getY());
-=======
     public ConcretePosition findVacantPositionOnTail(){
         int lineSize = line.getClients().size();
         return findVacant(lineSize);
@@ -105,7 +73,6 @@ public class CashRegistry extends Position {
         int i=0;
         for (var client:line.getClients()){
             var targetPosition =  findVacant(i);
->>>>>>> 1946d9b665b17c9f885d842160c09098910ab45f
             var clientMover  = new ClientMover(client, targetPosition);
             i++;
             clientMover.start();

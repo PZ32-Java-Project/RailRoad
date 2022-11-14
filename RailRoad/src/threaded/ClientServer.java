@@ -38,6 +38,7 @@ public class ClientServer extends Thread{
                     try {
                         if(hall.isTerminate()){
                             Write("ClientServer "+ cashRegistry.getId() +" has stopped");
+                            System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
                             return;
                         }
                         if(interval==-1) {
@@ -49,6 +50,7 @@ public class ClientServer extends Thread{
                         }
                         if(hall.isTerminate()){
                             Write("ClientServer "+ cashRegistry.getId() +" has stopped");
+                            System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
                             return;
                         }
                     } catch (InterruptedException e) {
@@ -63,13 +65,9 @@ public class ClientServer extends Thread{
 
                         //Dodo:    Зробити біг на вихід
                         Platform.runLater(() -> client.remove());
-<<<<<<< HEAD
-                        System.out.println("client " + client.getName() + " ID: "+client.getId()+" served at cash registry :" + cashRegistry.getName());
-                        Write("client " + client.getName() +" ID: "+client.getId()+ " served at cash registry :" + cashRegistry.getName());
-=======
                         cashRegistry.updatetLineUI();
+                        Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
                         System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
->>>>>>> 1946d9b665b17c9f885d842160c09098910ab45f
                     }
                     finally {
                         lock.unlock();

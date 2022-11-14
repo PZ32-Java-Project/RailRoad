@@ -5,6 +5,8 @@ import javafx.application.Platform;
 
 import models.Client;
 
+import static shared.MyFileWritter.Write;
+
 public class ClientMover extends Thread{
     Client client;
     Position currentPosition;
@@ -26,6 +28,7 @@ public class ClientMover extends Thread{
             try {
                 sleep(5);
             } catch (InterruptedException e) {
+                Write("Error while trying to move a client: ");
                 System.out.println("Error while trying to move a client: ");
                 e.printStackTrace();
             }

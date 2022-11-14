@@ -55,13 +55,9 @@ public class ClientsSpawner extends Thread{
                     var cashLine = cashRegistry.getLine();
                     cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
-<<<<<<< HEAD
-                    System.out.println("client " + client.getName() +" ID: "+client.getId()+" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
-                    Write("client " + client.getName() +" ID: "+client.getId()+" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
-=======
                     cashRegistry.updatetLineUI();
+                    Write("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
                     System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
->>>>>>> 1946d9b665b17c9f885d842160c09098910ab45f
                 }
             }
             finally {
@@ -69,6 +65,7 @@ public class ClientsSpawner extends Thread{
                 try {
                     if(hall.isTerminate()){
                         Write("Spawner has stopped");
+                        System.out.println("Spawner has stopped");
                         return;
                     }
                     if(interval==-1) {
@@ -80,6 +77,7 @@ public class ClientsSpawner extends Thread{
                     }
                     if(hall.isTerminate()){
                         Write("Spawner has stopped");
+                        System.out.println("Spawner has stopped");
                         return;
                     }
                 } catch (InterruptedException e) {
