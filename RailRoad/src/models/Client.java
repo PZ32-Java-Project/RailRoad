@@ -7,21 +7,21 @@ import abstractions.Position;
 import shared.Constants;
 import java.util.Random;
 
-import static shared.Constants.clientSize;
-
-public class Client extends Position {
+public class Client extends Position implements  Comparable<Client>  {
     private String name;
     private String surname;
     private int ticketsCount;
     private int id;
     private Circle clientCircle;
     private Pane pane;
+    private ClientTypes clientType;
 
-    public Client(Entrance entrance, int id, String name, String surname, Pane pane) {
+    public Client(Entrance entrance, int id, String name, String surname, ClientTypes priority, Pane pane) {
         super(entrance.getX(), entrance.getY());
         this.name = name;
         this.surname = surname;
         this.id = id;
+        this.clientType = priority;
         this.pane = pane;
         generateTickets();
     }
@@ -29,48 +29,23 @@ public class Client extends Position {
         var random = new Random();
         ticketsCount = random.nextInt(Constants.CLIENT_MAX_TICKETS_COUNT)+1;
     }
-    //region GetSet
-    public int getId(){
-        return id;
-    }
-    public String getName(){
-        return name;
-    }
 
-    public String getSurname(){
-        return surname;
-    }
-
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public int getTicketsCount() {
-        return ticketsCount;
-    }
-
-    public void setTicketsCount(int ticketsCount) {
-        this.ticketsCount = ticketsCount;
-    }
-
-    public void updateUI()
-    {
+    public void updateUI(){
         if (clientCircle != null) {
             pane.getChildren().remove(clientCircle);
         }
-
-        clientCircle = new Circle(5, Color.BLUE);
-        clientCircle.setStroke(Color.BLUE);
+        Color color;
+        switch (clientType){
+            case Veteran -> color=Color.OLIVE;
+            case Disabled -> color=Color.YELLOW;
+            case WithBaby -> color=Color.HOTPINK;
+            default -> color=Color.BLUE;
+        }
+        clientCircle = new Circle(5, color);
+        clientCircle.setStroke(color);
         clientCircle.setTranslateX(this.getX());
         clientCircle.setTranslateY(this.getY());
-        clientCircle.setFill(Color.BLUE);
-
+        clientCircle.setFill(color);
         pane.getChildren().add(clientCircle);
     }
 
@@ -82,14 +57,26 @@ public class Client extends Position {
         var map = Map.getInstance();
         map.removeAt(this);
     }
-
-    /*
     @Override
-    protected Long call() throws Exception {
-        this.clientUI();
-        return null;
+    public int compareTo(Client o) {
+        return clientType.compareTo(o.clientType);
     }
-    */
 
+    //region GetSet
+    public String getName(){
+        return name;
+    }
+
+    public String getSurname(){
+        return surname;
+    }
+    public ClientTypes getClientType(){
+        return clientType;
+    }
+
+    public int getTicketsCount() {
+        return ticketsCount;
+    }
     //endregion
 }
+

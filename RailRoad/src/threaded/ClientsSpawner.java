@@ -49,13 +49,19 @@ public class ClientsSpawner extends Thread{
                     Platform.runLater(() -> client.updateUI());
                     Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
                     var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
-                    moveClient(client, cashRegistry);
+                    //moveClient(client, cashRegistry);
+
                     map.getPositions().add(client);
                     var cashLine = cashRegistry.getLine();
-                    var result = cashLine.tryAdd(client);
+                    cashLine.tryAdd(client);
                     cashRegistry.setLine(cashLine);
+<<<<<<< HEAD
                     System.out.println("client " + client.getName() +" ID: "+client.getId()+" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
                     Write("client " + client.getName() +" ID: "+client.getId()+" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+=======
+                    cashRegistry.updatetLineUI();
+                    System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+>>>>>>> 1946d9b665b17c9f885d842160c09098910ab45f
                 }
             }
             finally {
@@ -84,9 +90,9 @@ public class ClientsSpawner extends Thread{
     }
 
     private void moveClient(Client client, CashRegistry cashRegistry) {
-        var clientTargetPosition = cashRegistry.findVacantPosition();
+        var clientTargetPosition = cashRegistry.findVacantPositionOnTail();
         var clientMover = new ClientMover(client, clientTargetPosition);
-        clientMover.run();
+        clientMover.start();
     }
 
     public Optional<CashRegistry> findCashRegistry(List<Position> cashRegistries, Client client){

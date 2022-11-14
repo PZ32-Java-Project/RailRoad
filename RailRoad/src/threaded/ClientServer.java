@@ -59,12 +59,17 @@ public class ClientServer extends Thread{
                         var line = cashRegistry.getLine();
                         var client = line.getClients().poll();
                         var pos = map.getPositions();
-                        var res = pos.remove(client);
-                        cashRegistry.moveLine();
+                        pos.remove(client);
+
                         //Dodo:    Зробити біг на вихід
                         Platform.runLater(() -> client.remove());
+<<<<<<< HEAD
                         System.out.println("client " + client.getName() + " ID: "+client.getId()+" served at cash registry :" + cashRegistry.getName());
                         Write("client " + client.getName() +" ID: "+client.getId()+ " served at cash registry :" + cashRegistry.getName());
+=======
+                        cashRegistry.updatetLineUI();
+                        System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
+>>>>>>> 1946d9b665b17c9f885d842160c09098910ab45f
                     }
                     finally {
                         lock.unlock();
