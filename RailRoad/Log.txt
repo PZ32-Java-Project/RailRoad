@@ -59,3 +59,20 @@ client Dmytro spawned at: 354,0 2022-11-14T13:58:30.411856100
 client Olexander spawned at: 86,1 2022-11-14T13:58:30.920830800
 client Olena served at cash registry :Cash Registry C 2022-11-14T13:58:31.350824900
 client Oleg spawned at: 85,0 2022-11-14T13:58:31.422825600
+client Dmytro spawned at: 48,0 2022-11-14T14:01:26.567073
+client Maxim spawned at: 423,0 2022-11-14T14:01:27.070802700
+client Vlad spawned at: 423,0 2022-11-14T14:01:27.575075700
+client Oleg spawned at: 48,0 2022-11-14T14:01:28.076031200
+client Dmytro spawned at: 48,0 2022-11-14T14:01:28.578686300
+client Olexander spawned at: 423,0 2022-11-14T14:01:29.080447100
+client Halina spawned at: 423,0 2022-11-14T14:01:29.582758600
+client Maxim spawned at: 48,0 2022-11-14T14:01:30.083602500
+client Vlad spawned at: 48,0 2022-11-14T14:01:30.585264700
+client Vlad spawned at: 48,0 2022-11-14T14:01:31.086986200
+client Olena spawned at: 48,0 2022-11-14T14:01:31.587953200
+client Oleg spawned at: 48,0 2022-11-14T14:01:32.089520900
+client Halina spawned at: 48,0 2022-11-14T14:01:32.591008400
+client Halina spawned at: 423,0 2022-11-14T14:01:33.093098600
+client Oleg spawned at: 48,0 2022-11-14T14:01:33.593463700
+client Vlad spawned at: 48,0 2022-11-14T14:01:34.096240700
+client Maxim spawned at: 423,0 2022-11-14T14:01:34.596925100
