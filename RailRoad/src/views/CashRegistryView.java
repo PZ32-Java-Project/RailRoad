@@ -4,6 +4,7 @@ import abstractions.IViewable;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import models.CashRegistry;
+import models.Map;
 
 import static shared.Constants.cashRegistryHeight;
 import static shared.Constants.cashRegistryWidth;
@@ -15,10 +16,24 @@ public class CashRegistryView implements IViewable {
 
     public CashRegistryView(CashRegistry cashRegistry) {
         this.cashRegistry = cashRegistry;
+        rectangle = new Rectangle();
+        pane.getChildren().add(rectangle);
+
+        rectangle.setOnMouseClicked(mouseEvent -> {
+            // Disable cash registry
+            cashRegistry.setOnPause(true);
+            updateUI();
+
+            // Get and enable reserve cash registry
+            var reserveCashRegistry = Map.getInstance().getReserveCashRegistry();
+            if (reserveCashRegistry.isOnPause()) {
+                reserveCashRegistry.setOnPause(false);
+                reserveCashRegistry.getView().updateUI();
+            }
+        });
     }
 
    public void updateUI(){
-        rectangle = new Rectangle();
         rectangle.setHeight(cashRegistryHeight);
         rectangle.setWidth(cashRegistryWidth);
         rectangle.setTranslateX(cashRegistry.getX());
@@ -30,14 +45,6 @@ public class CashRegistryView implements IViewable {
             rectangle.setFill(Color.ORANGE);
             rectangle.setStroke(Color.ORANGE);
         }
-        pane.getChildren().add(rectangle);
-
-
-       //зміна чогось (тут просто колір міняє) при натиску на прямокутник
-       rectangle.setOnMouseClicked(mouseEvent -> {
-           rectangle.setFill(Color.RED);
-           rectangle.setStroke(Color.RED);
-       });
     }
 
    public void removeUI() {

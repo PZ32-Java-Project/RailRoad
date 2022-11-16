@@ -16,10 +16,11 @@ public class ReserveCashRegistryView implements IViewable {
 
     public ReserveCashRegistryView(CashRegistry cashRegistry) {
         this.cashRegistry = cashRegistry;
+        rectangle = new Rectangle();
+        pane.getChildren().add(rectangle);
     }
 
     public void updateUI(){
-        rectangle = new Rectangle();
         rectangle.setHeight(cashRegistryHeight);
         rectangle.setWidth(cashRegistryWidth);
         rectangle.setTranslateX(cashRegistry.getX());
@@ -31,7 +32,6 @@ public class ReserveCashRegistryView implements IViewable {
             rectangle.setFill(Color.RED);
             rectangle.setStroke(Color.RED);
         }
-        pane.getChildren().add(rectangle);
     }
 
     public void removeUI() {

@@ -74,4 +74,11 @@ public class Map {
                 .findFirst()
                 .orElse(null);
     }
+
+    public ReserveCashRegistry getReserveCashRegistry() {
+        return (ReserveCashRegistry)positions.stream()
+                .filter(p -> p instanceof ReserveCashRegistry)
+                .findFirst()
+                .orElse(null);
+    }
 }
