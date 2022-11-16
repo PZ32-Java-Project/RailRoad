@@ -31,6 +31,13 @@ public class CashRegistryView implements IViewable {
             rectangle.setStroke(Color.ORANGE);
         }
         pane.getChildren().add(rectangle);
+
+
+       //зміна чогось (тут просто колір міняє) при натиску на прямокутник
+       rectangle.setOnMouseClicked(mouseEvent -> {
+           rectangle.setFill(Color.RED);
+           rectangle.setStroke(Color.RED);
+       });
     }
 
    public void removeUI() {
