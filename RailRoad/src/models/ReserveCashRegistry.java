@@ -10,7 +10,7 @@ public class ReserveCashRegistry extends CashRegistry{
     private List<Position> cashRegistries;
 
     //Play thread in constructor
-    private void Cheak(){
+    private void Check(){
         int amountOfCashReg = cashRegistries.size();
         while (true) {
             if(!isWorking) {
@@ -40,7 +40,6 @@ public class ReserveCashRegistry extends CashRegistry{
         }
     }
 
-
     //Adding from crashed line clients and then delete them from
     private void addFromLine(Line line){
         for (var item: line.getClients()) {
@@ -50,8 +49,8 @@ public class ReserveCashRegistry extends CashRegistry{
         }
     }
 
-    public ReserveCashRegistry(int x, int y, String name, int ID, Pane pane) {
-        super(x, y, name, ID, pane);
+    public ReserveCashRegistry(int x, int y, String name, int ID) {
+        super(x, y, name, ID);
         Map map = Map.getInstance();
         cashRegistries = map.getCashRegistries();
         isWorking = false;

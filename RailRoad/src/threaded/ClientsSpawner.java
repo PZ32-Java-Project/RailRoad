@@ -3,7 +3,6 @@ package threaded;
 import abstractions.ISeedingManager;
 import abstractions.Position;
 import javafx.application.Platform;
-import javafx.scene.layout.Pane;
 import managers.SeedingManager;
 import models.CashRegistry;
 import models.Client;
@@ -22,11 +21,11 @@ public class ClientsSpawner extends Thread{
     int interval;
     private ISeedingManager seedingManager;
 
-    public ClientsSpawner(Hall hall, Lock lock, int interval, Pane pane){
-        this.hall=hall;
-        this.lock=lock;
-        this.interval=interval;
-        seedingManager = new SeedingManager(pane);
+    public ClientsSpawner(Hall hall, Lock lock, int interval) {
+        this.hall = hall;
+        this.lock = lock;
+        this.interval = interval;
+        seedingManager = new SeedingManager();
     }
 
     public void run() {
@@ -34,31 +33,35 @@ public class ClientsSpawner extends Thread{
         boolean enableSpawning = true;
         while(true) {
             try {
-                lock.lock();
-                int clientsCount = map.getClients().size();
-                int clientsLimit = LINE_MAX_CLIENTS_COUNT*map.getCashRegistries().size();
-                if (clientsCount >= clientsLimit)
-                    enableSpawning=false;
-                else if(clientsCount<clientsLimit*0.7)
-                    enableSpawning = true;
-                if (enableSpawning) {
-                    var cashRegistries = map.getCashRegistries();
-                    var clientsList = map.getClients();
-                    var entrancesList = map.getEntrances();
-                    var client =  seedingManager.generateClient(clientsList,entrancesList);
-                    Platform.runLater(() -> client.updateUI());
-                    Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
-                    var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
-                    //moveClient(client, cashRegistry);
-
-                    map.getPositions().add(client);
-                    var cashLine = cashRegistry.getLine();
-                    cashLine.tryAdd(client);
-                    cashRegistry.setLine(cashLine);
-                    cashRegistry.updatetLineUI();
-                    Write("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
-                    System.out.println("client " + client.getName() +" spawned at: "+ client.getPosition().getX()+","+client.getPosition().getY());
+                if(hall.isTerminate()){
+                    return;
+                }else {
+                    lock.lock();
+                    int clientsCount = map.getClients().size();
+                    int clientsLimit = LINE_MAX_CLIENTS_COUNT * map.getCashRegistries().size();
+                    if (clientsCount >= clientsLimit)
+                        enableSpawning = false;
+                    else if (clientsCount < clientsLimit * 0.7)
+                        enableSpawning = true;
+                    if (enableSpawning) {
+                            var cashRegistries = map.getCashRegistries();
+                            var clientsList = map.getClients();
+                            var entrancesList = map.getEntrances();
+                            var client = seedingManager.generateClient(clientsList, entrancesList);
+                            Platform.runLater(() -> client.updateUI());
+                            Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
+                            var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
+                        //moveClient(client, cashRegistry);
+                            map.getPositions().add(client);
+                            var cashLine = cashRegistry.getLine();
+                            cashLine.tryAdd(client);
+                            cashRegistry.setLine(cashLine);
+                            cashRegistry.updatedLineUI();
+                            Write("client " + client.getName() + " spawned at: " + client.getPosition().getX() + "," + client.getPosition().getY());
+                            System.out.println("client " + client.getName() + " spawned at: " + client.getPosition().getX() + "," + client.getPosition().getY());
+                    }
                 }
+
             }
             finally {
                 lock.unlock();

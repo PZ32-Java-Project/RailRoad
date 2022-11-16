@@ -11,6 +11,8 @@ public class RailRoadApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("RailRoadGUI.fxml"));
         primaryStage.setTitle("RailRoad Simulator");
+        //pane.setOnMouseMoved(e -> {
+        //primaryStage.
         primaryStage.setScene(new Scene(root, 750, 520)); //перший параметр ширина, другий висота
         primaryStage.show();
     }

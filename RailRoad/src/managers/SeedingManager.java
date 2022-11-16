@@ -16,15 +16,13 @@ import static shared.Constants.*;
 public class SeedingManager implements ISeedingManager {
     private List<Point> usedPositions;
     private boolean generatedReserveRegistry = false;
-    private Pane pane;
     private static int currentClientId = 0;
     private static int currentCashRegistryId = 0;
     private static char currentEntranceSymbol = 'A';
     private static char currentCashRegistrySymbol = 'A';
 
-    public SeedingManager(Pane pane){
+    public SeedingManager(){
         usedPositions = new ArrayList<>();
-        this.pane = pane;
     }
 
     public Client generateClient(List<Position> clients, List<Position> entrances){
@@ -57,15 +55,14 @@ public class SeedingManager implements ISeedingManager {
             currentClientId,
             chosenName,
             chosenSurname,
-            type,
-            pane
+            type
         );
     }
 
     public List<Entrance> generateEntrances(int entrancesCount) {
         List<Entrance> entrances = new ArrayList<>();
-        if(entrancesCount > 5){
-            entrancesCount = 5;
+        if(entrancesCount > MAX_ENTRANCES_COUNT){
+            entrancesCount = MAX_ENTRANCES_COUNT;
         }
         for (int i = 0; i < entrancesCount; ++i) {
             entrances.add(generateEntrance(i));
@@ -80,20 +77,20 @@ public class SeedingManager implements ISeedingManager {
         int y = 0;
         while (true) {
             x = rand.nextInt(0, MAP_WIDTH);
-            if (CheckPositions(x, y)) {
+            if (CheckPositions(x, y, entranceSize)) {
                 break;
             }
         }
         usedPositions.add(new Point(x, y));
-        var entrance = new Entrance(x, y, "Entrance " + currentEntranceSymbol, pane);
+        var entrance = new Entrance(x, y, "Entrance " + currentEntranceSymbol);
         ++currentEntranceSymbol;
         return entrance;
     }
 
     public List<CashRegistry> generateCashRegistries(int cashRegistriesCount) {
         List<CashRegistry> cashRegistries = new ArrayList<>();
-        if(cashRegistriesCount > 5){
-            cashRegistriesCount = 5;
+        if(cashRegistriesCount > MAX_CASH_REGISTRIES_COUNT){
+            cashRegistriesCount = MAX_CASH_REGISTRIES_COUNT;
         }
         for (int i = 0; i < cashRegistriesCount; ++i) {
             boolean isRight = i > 2;
@@ -108,12 +105,12 @@ public class SeedingManager implements ISeedingManager {
             int x = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
             int y = 0;
             while(true){
-                if(CheckPositions(x, y)) break;
-                x = 0;
-                y = rand.nextInt(cashRegistryWidth, MAP_HEIGHT - cashRegistryWidth);
+                if(CheckPositions(x, y, cashRegistryWidth)) break;
+                /*x = 0;
+                y = rand.nextInt(cashRegistryWidth, MAP_HEIGHT - cashRegistryWidth);*/
             }
             usedPositions.add(new Point(x, y));
-            ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "ReserveRegistry", 0, pane);
+            ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "ReserveRegistry", 0);
 
             return cashRegistry;
         }else{
@@ -127,24 +124,28 @@ public class SeedingManager implements ISeedingManager {
         int y;
         while (true) {
             y = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
-            if (CheckPositions(x, y)) {
+            if (CheckPositions(x, y, cashRegistryWidth)) {
                 break;
             }
         }
         usedPositions.add(new Point(x, y));
         var registry = new CashRegistry(x, y, "Cash Registry " + currentCashRegistrySymbol,
-                currentCashRegistryId, pane);
+                currentCashRegistryId);
         ++currentCashRegistrySymbol;
         return registry;
     }
 
-    private boolean CheckPositions(int x, int y) {
-        boolean flag = false;
+    private boolean CheckPositions(int x, int y, int width) {
+        boolean flag = true;
         for (Point usedPosition : usedPositions) {
-            if (x == usedPosition.getX() && y == usedPosition.getY()) {
-                flag = true;
+            int tempX = (int)usedPosition.getX();
+            int tempY = (int)usedPosition.getY();
+            if ((x > (tempX - (width/2 + 3)) && y > (tempY - (width/2 + 3)))
+            && (x < (tempX + (width/2 + 3)) && y < (tempY + (width/2 + 3)))) {
+                flag = false;
+                break;
             }
         }
-        return !flag;
+        return flag;
     }
 }

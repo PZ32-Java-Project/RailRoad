@@ -10,6 +10,8 @@ import threaded.ClientServer;
 import threaded.ClientsSpawner;
 
 import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -20,14 +22,12 @@ public class Hall {
     private Map map;
     private IInputManager inputManager;
     private ISeedingManager seedingManager;
-    private Pane pane;
     private boolean terminate = false;
 
-    public Hall(Pane pane) {
+    public Hall() {
         map = Map.getInstance();
         inputManager = new InputManager();
-        seedingManager = new SeedingManager(pane);
-        this.pane = pane;
+        seedingManager = new SeedingManager();
     }
 
     public void initialize(int cashCount, int entranceCount, int spawnInterval, int cashRegistryServeTime){
@@ -44,20 +44,22 @@ public class Hall {
     }
 
     public void stop(){
-        terminate =true;
+        terminate = true;
+        map.setData(new ArrayList<>());
     }
 
     public void spawnClients(Lock lock) {
-        var thread = new ClientsSpawner(this, lock, spawnInterval, pane); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+        var thread = new ClientsSpawner(this, lock, spawnInterval); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
         thread.start();
     }
 
     public void initializeServing(Lock lock) {
-        for (var cashRegistry :map.getCashRegistries() ) {
+        for (var cashRegistry : map.getCashRegistries()) {
             var thread = new ClientServer((CashRegistry)cashRegistry ,this, lock, cashRegistryServeTime); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
             thread.start();
         }
     }
+
 
     public void generateCashRegistries(){
         var cashRegistries =  seedingManager.generateCashRegistries(cashRegistriesCount);
@@ -88,6 +90,5 @@ public class Hall {
     public boolean isTerminate() {
         return terminate;
     }
-
 
 }

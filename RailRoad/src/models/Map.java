@@ -1,9 +1,8 @@
 package models;
 
 import abstractions.Position;
-import javafx.geometry.Pos;
 import shared.Constants;
-
+import shared.Global;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,8 +21,7 @@ public class Map {
     }
 
     public static Map getInstance() {
-        if (instance == null)
-        {
+        if (instance == null){
             instance = new Map();
         }
         return instance;
@@ -37,10 +35,10 @@ public class Map {
         positions.add(entity);
         return true;
     }
-    public List<Position>getPositions(){
+    public List<Position> getPositions(){
         return positions;
     }
-    public List<Position>getClients(){
+    public List<Position> getClients(){
      return positions.stream().filter(c -> c instanceof Client).collect(Collectors.toList());
     }
     public List<Position> getEntrances(){
@@ -57,7 +55,6 @@ public class Map {
     public String toString() {
         return "";
     }
-
     public void removeAt(Position position) {
         positions.remove(position);
     }

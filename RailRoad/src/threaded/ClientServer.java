@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import models.CashRegistry;
 import models.Hall;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
@@ -22,6 +23,11 @@ public class ClientServer extends Thread{
     }
     public void run(){
         var map = hall.getMap();
+        if(hall.isTerminate()) {
+            /*cashRegistry.getLine().getClients().clear();
+            int k = cashRegistry.getLine().getClients().size();*/
+            //this.stop();
+        }
         //Edit for priority queue
         while (!cashRegistry.isOnPause()) {
             var isNull = false;
@@ -58,14 +64,17 @@ public class ClientServer extends Thread{
                     }
                     try {
                         lock.lock();
+                        if(hall.isTerminate()) {
+                            cashRegistry.setLine(null);
+                        }
                         var line = cashRegistry.getLine();
                         var client = line.getClients().poll();
                         var pos = map.getPositions();
                         pos.remove(client);
 
-                        //Dodo:    Зробити біг на вихід
+                            //Dodo:    Зробити біг на вихід
                         Platform.runLater(() -> client.remove());
-                        cashRegistry.updatetLineUI();
+                        cashRegistry.updatedLineUI();
                         Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
                         System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
                     }

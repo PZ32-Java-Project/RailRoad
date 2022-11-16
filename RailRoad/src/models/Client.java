@@ -5,25 +5,34 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import abstractions.Position;
 import shared.Constants;
+import views.ClientView;
+
 import java.util.Random;
 
 public class Client extends Position implements  Comparable<Client>  {
     private String name;
     private String surname;
     private int ticketsCount;
+    private ClientView cl;
     private int id;
-    private Circle clientCircle;
-    private Pane pane;
     private ClientTypes clientType;
 
-    public Client(Entrance entrance, int id, String name, String surname, ClientTypes priority, Pane pane) {
+    public Client(Entrance entrance, int id, String name, String surname, ClientTypes priority) {
         super(entrance.getX(), entrance.getY());
         this.name = name;
         this.surname = surname;
         this.id = id;
         this.clientType = priority;
-        this.pane = pane;
+        this.cl = new ClientView();
         generateTickets();
+    }
+
+    public ClientView getCl() {
+        return cl;
+    }
+
+    public void setCl(ClientView cl) {
+        this.cl = cl;
     }
     private void generateTickets() {
         var random = new Random();
@@ -31,29 +40,11 @@ public class Client extends Position implements  Comparable<Client>  {
     }
 
     public void updateUI(){
-        if (clientCircle != null) {
-            pane.getChildren().remove(clientCircle);
-        }
-        Color color;
-        switch (clientType){
-            case Veteran -> color=Color.OLIVE;
-            case Disabled -> color=Color.YELLOW;
-            case WithBaby -> color=Color.HOTPINK;
-            default -> color=Color.BLUE;
-        }
-        clientCircle = new Circle(5, color);
-        clientCircle.setStroke(color);
-        clientCircle.setTranslateX(this.getX());
-        clientCircle.setTranslateY(this.getY());
-        clientCircle.setFill(color);
-        pane.getChildren().add(clientCircle);
+        cl.updateClientUI(this);
     }
 
     public void remove() {
-        if (clientCircle != null) {
-            pane.getChildren().remove(clientCircle);
-        }
-
+        cl.removeClientUI();
         var map = Map.getInstance();
         map.removeAt(this);
     }
@@ -77,6 +68,11 @@ public class Client extends Position implements  Comparable<Client>  {
     public int getTicketsCount() {
         return ticketsCount;
     }
+    @Override
+    public String toString(){
+        return "Name: " + name
+                + "\nTickets count: " + ticketsCount
+                + "\nClient type: " + clientType;
+    }
     //endregion
 }
-

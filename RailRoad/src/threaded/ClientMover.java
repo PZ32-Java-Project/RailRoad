@@ -4,6 +4,8 @@ import abstractions.Position;
 import javafx.application.Platform;
 
 import models.Client;
+import shared.Global;
+import views.ClientView;
 
 import static shared.MyFileWritter.Write;
 
@@ -21,8 +23,9 @@ public class ClientMover extends Thread{
     public void run() {
         while (!currentPosition.isPosition(targetPosition)) {
             // Make one step towards target position
-            makeStep();
-            Platform.runLater(() -> client.updateUI());
+            //if()
+                makeStep();
+                Platform.runLater(() -> client.updateUI());
 
             // Sleep 0.005 second
             try {
