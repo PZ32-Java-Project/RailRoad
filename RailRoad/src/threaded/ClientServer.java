@@ -81,7 +81,13 @@ public class ClientServer extends Thread{
 
                         // Move to an exit
                         var clientMover = new ClientMover(client, exit, true);
-
+                        try {
+                            client.setStopMoving(true);
+                            sleep(7);
+                            client.setStopMoving(false);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         clientMover.start();
 
                         Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());

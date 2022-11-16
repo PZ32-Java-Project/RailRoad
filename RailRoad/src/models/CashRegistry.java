@@ -64,7 +64,7 @@ public class CashRegistry extends Position {
 
         try {
             line.getClients().stream().forEach(c->c.setStopMoving(true));
-            sleep(6);
+            sleep(7);
             line.getClients().stream().forEach(c->c.setStopMoving(false));
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
