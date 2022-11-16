@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static shared.Constants.*;
 
@@ -25,13 +26,13 @@ public class SeedingManager implements ISeedingManager {
     }
 
     public Client generateClient(List<Position> clients, List<Position> entrances){
-        Random rand = new Random();
-        int chosenEntrance = rand.nextInt(0, entrances.size());
+        Random rand = new java.util.Random();
+        int chosenEntrance = ThreadLocalRandom.current().nextInt(0, entrances.size());
         String chosenName;
         String chosenSurname;
         while(true) {
-            var currentName = names[rand.nextInt(0, names.length)];
-            var currentSurname = surnames[rand.nextInt(0, surnames.length)];
+            var currentName = names[ThreadLocalRandom.current().nextInt(0, names.length)];
+            var currentSurname = surnames[ThreadLocalRandom.current().nextInt(0, surnames.length)];
             boolean isNameSurnameTaken = clients.stream()
                     .map(c -> (Client)c)
                     .anyMatch(c -> c.getName().equals(currentName) && c.getSurname().equals(currentSurname));
@@ -74,7 +75,7 @@ public class SeedingManager implements ISeedingManager {
         int x;
         int y = 0;
         while (true) {
-            x = rand.nextInt(0, MAP_WIDTH);
+            x = ThreadLocalRandom.current().nextInt(0, MAP_WIDTH);
             if (CheckPositions(x, y, entranceSize)) {
                 break;
             }
@@ -94,12 +95,13 @@ public class SeedingManager implements ISeedingManager {
             boolean isRight = i > 2;
             cashRegistries.add(generateCashRegistry(isRight));
         }
+        cashRegistries.add(generateReserveCashRegistry());
         return cashRegistries;
     }
 
     public Exit generateExit() {
         var rand = new Random();
-        int x = rand.nextInt(exitRadius, MAP_WIDTH - exitRadius);
+        int x = ThreadLocalRandom.current().nextInt(exitRadius, MAP_WIDTH - exitRadius);
         int y = MAP_HEIGHT;
         return new Exit(x, y);
     }
@@ -107,7 +109,7 @@ public class SeedingManager implements ISeedingManager {
     public ReserveCashRegistry generateReserveCashRegistry(){
         if(generatedReserveRegistry == false){
             Random rand = new Random();
-            int x = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
+            int x = ThreadLocalRandom.current().nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
             int y = 0;
             while(true){
                 if(CheckPositions(x, y, cashRegistryWidth)) break;
@@ -128,7 +130,7 @@ public class SeedingManager implements ISeedingManager {
         int x = isRight ? MAP_WIDTH - cashRegistryWidth*2 : cashRegistryWidth;
         int y;
         while (true) {
-            y = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
+            y = ThreadLocalRandom.current().nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
             if (CheckPositions(x, y, cashRegistryWidth)) {
                 break;
             }

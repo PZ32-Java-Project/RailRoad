@@ -4,9 +4,7 @@ import abstractions.ISeedingManager;
 import abstractions.Position;
 import javafx.application.Platform;
 import managers.SeedingManager;
-import models.CashRegistry;
-import models.Client;
-import models.Hall;
+import models.*;
 import models.Map;
 
 import java.util.*;
@@ -37,6 +35,8 @@ public class ClientsSpawner extends Thread{
                     return;
                 }else {
                     lock.lock();
+
+
                     int clientsCount = map.getClients().size();
                     int clientsLimit = LINE_MAX_CLIENTS_COUNT * map.getCashRegistries().size();
                     if (clientsCount >= clientsLimit)
@@ -44,13 +44,14 @@ public class ClientsSpawner extends Thread{
                     else if (clientsCount < clientsLimit * 0.7)
                         enableSpawning = true;
                     if (enableSpawning) {
-                            var cashRegistries = map.getCashRegistries();
-                            var clientsList = map.getClients();
-                            var entrancesList = map.getEntrances();
-                            var client = seedingManager.generateClient(clientsList, entrancesList);
+                        var cashRegistries = map.getCashRegistries();
+                        var clientsList = map.getClients();
+                        var entrancesList = map.getEntrances();
+                        var client = seedingManager.generateClient(clientsList, entrancesList);
+                        Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
+                        var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
+                        if (cashRegistry != null) {
                             Platform.runLater(() -> client.updateUI());
-                            Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
-                            var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
                             map.getPositions().add(client);
                             var cashLine = cashRegistry.getLine();
                             cashLine.tryAdd(client);
@@ -58,6 +59,9 @@ public class ClientsSpawner extends Thread{
                             cashRegistry.updatedLineUI();
                             Write("client " + client.getName() + " spawned at: " + client.getPosition().getX() + "," + client.getPosition().getY());
                             System.out.println("client " + client.getName() + " spawned at: " + client.getPosition().getX() + "," + client.getPosition().getY());
+                        }else{
+                            client.remove();
+                        }
                     }
                 }
             }
@@ -94,7 +98,7 @@ public class ClientsSpawner extends Thread{
                 .min(Comparator.naturalOrder()))
                 .stream().findFirst().orElse(0);
         var closestCash  = cashRegistriesList.stream()
-                .filter(c->!c.isOnPause()&&c.getLine().getClients().size() == minLineSize);
+                .filter(c->!c.isOnPause()&& c.getLine().getClients().size() == minLineSize);
         var closestVacantCash =  (closestCash.min((i, j) -> {
             var cr1 = (Double)(client.getDistance(i.getPosition()));
             var cr2 = (Double)(client.getDistance(j.getPosition()));

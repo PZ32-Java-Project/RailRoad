@@ -6,18 +6,16 @@ import javafx.scene.layout.Pane;
 import java.util.List;
 
 public class ReserveCashRegistry extends CashRegistry{
-    private Boolean isWorking;
     private List<Position> cashRegistries;
-
     //Play thread in constructor
-    private void Check(){
+    private void run(){
         int amountOfCashReg = cashRegistries.size();
         while (true) {
-            if(!isWorking) {
+            if(onPause) {
                 for (var cash : cashRegistries) {
                     var tmp = (CashRegistry) cash;
                     if (tmp.isOnPause()) {
-                        isWorking = true;
+                        onPause = false;
                         addFromLine(((CashRegistry) cash).line);
                     }
                 }
@@ -27,7 +25,7 @@ public class ReserveCashRegistry extends CashRegistry{
                 for (var cash : cashRegistries) {
                     var tmp = (CashRegistry) cash;
                     if (tmp.isOnPause()) {
-                        isWorking = true;
+                        onPause = false;
                         addFromLine(((CashRegistry) cash).line);
                     }
                     else {
@@ -35,7 +33,7 @@ public class ReserveCashRegistry extends CashRegistry{
                     }
                 }
                 if (amountInProcess == amountOfCashReg)
-                    isWorking = false;
+                    onPause = true;
             }
         }
     }
@@ -53,13 +51,14 @@ public class ReserveCashRegistry extends CashRegistry{
         super(x, y, name, ID);
         Map map = Map.getInstance();
         cashRegistries = map.getCashRegistries();
-        isWorking = false;
+        onPause = true;
+        ReserveCashRegistry reserveCashRegistry = new ReserveCashRegistry(x, y, name, ID);
     }
 
     public ReserveCashRegistry(int x, int y, String name, Line line) {
         super(x, y, name, line);
         Map map = Map.getInstance();
         cashRegistries = map.getCashRegistries();
-        isWorking = false;
+        onPause = true;
     }
 }
