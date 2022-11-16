@@ -16,6 +16,7 @@ public class Client extends Position implements  Comparable<Client>  {
     private ClientView cl;
     private int id;
     private ClientTypes clientType;
+    private boolean stopMoving = false;
 
     public Client(Entrance entrance, int id, String name, String surname, ClientTypes priority) {
         super(entrance.getX(), entrance.getY());
@@ -73,6 +74,14 @@ public class Client extends Position implements  Comparable<Client>  {
         return "Name: " + name
                 + "\nTickets count: " + ticketsCount
                 + "\nClient type: " + clientType;
+    }
+
+    public boolean isStopMoving() {
+        return stopMoving;
+    }
+
+    public void setStopMoving(boolean stopMoving) {
+        this.stopMoving = stopMoving;
     }
     //endregion
 }

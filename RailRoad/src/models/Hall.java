@@ -6,6 +6,7 @@ import abstractions.Position;
 import managers.InputManager;
 import managers.SeedingManager;
 import shared.Constants;
+import shared.Global;
 import threaded.ClientServer;
 import threaded.ClientsSpawner;
 
@@ -26,10 +27,12 @@ public class Hall {
     private ISeedingManager seedingManager;
     private boolean terminate = false;
 
+
     private Hall() {
         map = Map.getInstance();
         inputManager = new InputManager();
         seedingManager = new SeedingManager();
+
     }
 
 

@@ -3,9 +3,11 @@ package models;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import abstractions.Position;
+import shared.Global;
 import threaded.ClientMover;
 import views.CashRegistryView;
 
+import static java.lang.Thread.sleep;
 import static shared.Constants.*;
 
 public class CashRegistry extends Position {
@@ -13,6 +15,7 @@ public class CashRegistry extends Position {
     protected Line line;
     protected int id;
     protected boolean onPause;
+
     public CashRegistry(int x, int y, String name, int id) {
         super(x, y);
         this.name = name;
@@ -56,7 +59,15 @@ public class CashRegistry extends Position {
         return findVacant(lineSize);
     }
     public void updatedLineUI(){
-      //  int lineSize = line.getClients().size();
+
+        try {
+            line.getClients().stream().forEach(c->c.setStopMoving(true));
+            sleep(6);
+            line.getClients().stream().forEach(c->c.setStopMoving(false));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        //  int lineSize = line.getClients().size();
         int i = 0;
         for (var client:line.getClients()){
             var targetPosition =  findVacant(i);

@@ -18,6 +18,7 @@ public class ClientMover extends Thread{
     Position targetPosition;
 
 
+
     public ClientMover (Client client, Position targetPosition) {
         this.client = client;
         this.currentPosition = client;
@@ -38,9 +39,15 @@ public class ClientMover extends Thread{
                     Platform.runLater(() ->pane.getChildren().clear());
                     return;
                 }
+                if(client.isStopMoving()){
+                    return;
+                }
                 sleep(5);
                 if(hall.isTerminate()){
                     Platform.runLater(() ->pane.getChildren().clear());
+                    return;
+                }
+                if(client.isStopMoving()){
                     return;
                 }
             } catch (InterruptedException e) {
