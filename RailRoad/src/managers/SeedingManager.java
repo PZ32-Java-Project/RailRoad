@@ -43,10 +43,9 @@ public class SeedingManager implements ISeedingManager {
             }
         }
         ++currentClientId;
-        var chance = rand.nextInt(5);
+        var chance = rand.nextInt(4);
         ClientTypes type = ClientTypes.Ordinary;
         ClientTypes[] EnumValues = ClientTypes.values();
-        System.out.println(chance);
         if(chance==0){
             type = EnumValues[rand.nextInt(ClientTypes.values().length-1)];
         }

@@ -51,7 +51,7 @@ public class RailRoadController {
     {
         auto.setToggleGroup(group);
         manual.setToggleGroup(group);
-        hall = new Hall();
+        hall = Hall.getInstance();
         Global.pane = pane;
         servingLabel.setVisible(false);
         spawnLabel.setVisible(false);
@@ -83,7 +83,7 @@ public class RailRoadController {
             setButton.setVisible(false);
             stopButton.setLayoutX(89);
             stopButton.setLayoutY(111);
-            hall.initialize(3, 3, 500, -1);
+            hall.initialize(3, 3, 1500, -1);
         }else if(manual.isSelected()){
             servingLabel.setVisible(true);
             spawnLabel.setVisible(true);

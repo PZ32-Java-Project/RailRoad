@@ -12,16 +12,16 @@ import static shared.MyFileWritter.Write;
 
 public class ClientServer extends Thread{
     private CashRegistry cashRegistry;
-    private Hall hall;
     private Lock lock;
     private int interval;
-    public ClientServer (CashRegistry cashRegistry, Hall hall, Lock lock, int interval){
+    public ClientServer (CashRegistry cashRegistry,  Lock lock, int interval){
         this.cashRegistry=cashRegistry;
-        this.hall=hall;
+
         this.lock=lock;
         this.interval=interval;
     }
     public void run(){
+        var hall = Hall.getInstance();
         var map = hall.getMap();
         if(hall.isTerminate()) {
             /*cashRegistry.getLine().getClients().clear();
@@ -42,6 +42,7 @@ public class ClientServer extends Thread{
             if (isNull){
                 if (isNotEmpty) {
                     try {
+                        var ticketsCount =  cashRegistry.getLine().getClients().peek().getTicketsCount();
                         if(hall.isTerminate()){
                             Write("ClientServer "+ cashRegistry.getId() +" has stopped");
                             System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
@@ -49,7 +50,7 @@ public class ClientServer extends Thread{
                         }
                         if(interval==-1) {
                             var random = new Random();
-                            sleep(random.nextInt(5000)+10000);
+                            sleep((random.nextInt(2500)+5000)*ticketsCount);
                         }
                         else{
                             sleep(interval);
@@ -72,7 +73,7 @@ public class ClientServer extends Thread{
                         var pos = map.getPositions();
                         pos.remove(client);
 
-                            //Dodo:    Зробити біг на вихід
+                        //Dodo:    Зробити біг на вихід
                         Platform.runLater(() -> client.remove());
                         cashRegistry.updatedLineUI();
                         Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());

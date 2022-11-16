@@ -16,20 +16,29 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static shared.Constants.*;
+import static shared.Global.pane;
 
 // TODO: add storage (List) for lines, etc?
 public class Hall {
+    private static Hall instance;
     private Map map;
     private IInputManager inputManager;
     private ISeedingManager seedingManager;
     private boolean terminate = false;
 
-    public Hall() {
+    private Hall() {
         map = Map.getInstance();
         inputManager = new InputManager();
         seedingManager = new SeedingManager();
     }
 
+
+    public static Hall getInstance() {
+        if (instance == null){
+            instance = new Hall();
+        }
+        return instance;
+    }
     public void initialize(int cashCount, int entranceCount, int spawnInterval, int cashRegistryServeTime){
         terminate = false;
         Constants.cashRegistriesCount = cashCount;
@@ -46,6 +55,7 @@ public class Hall {
     public void stop(){
         terminate = true;
         map.setData(new ArrayList<>());
+        pane.getChildren().clear();
     }
 
     public void spawnClients(Lock lock) {
@@ -55,7 +65,7 @@ public class Hall {
 
     public void initializeServing(Lock lock) {
         for (var cashRegistry : map.getCashRegistries()) {
-            var thread = new ClientServer((CashRegistry)cashRegistry ,this, lock, cashRegistryServeTime); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+            var thread = new ClientServer((CashRegistry)cashRegistry , lock, cashRegistryServeTime); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
             thread.start();
         }
     }
@@ -90,5 +100,6 @@ public class Hall {
     public boolean isTerminate() {
         return terminate;
     }
+
 
 }
