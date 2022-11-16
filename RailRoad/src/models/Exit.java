@@ -13,6 +13,6 @@ public class Exit extends Position {
 
     private void initializeView() {
         view = new ExitView(this);
-        view.addUi();
+        view.updateUI();
     }
 }

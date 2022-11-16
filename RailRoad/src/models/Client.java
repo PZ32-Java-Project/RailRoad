@@ -1,8 +1,5 @@
 package models;
 
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import abstractions.Position;
 import shared.Constants;
 import views.ClientView;
@@ -13,7 +10,7 @@ public class Client extends Position implements  Comparable<Client>  {
     private String name;
     private String surname;
     private int ticketsCount;
-    private ClientView cl;
+    private ClientView view;
     private int id;
     private ClientTypes clientType;
 
@@ -23,16 +20,20 @@ public class Client extends Position implements  Comparable<Client>  {
         this.surname = surname;
         this.id = id;
         this.clientType = priority;
-        this.cl = new ClientView();
         generateTickets();
+        initializeView();
     }
 
-    public ClientView getCl() {
-        return cl;
+    public void initializeView() {
+        this.view = new ClientView(this);
     }
 
-    public void setCl(ClientView cl) {
-        this.cl = cl;
+    public ClientView getView() {
+        return view;
+    }
+
+    public void setView(ClientView view) {
+        this.view = view;
     }
     private void generateTickets() {
         var random = new Random();
@@ -40,11 +41,11 @@ public class Client extends Position implements  Comparable<Client>  {
     }
 
     public void updateUI(){
-        cl.updateClientUI(this);
+        view.updateUI();
     }
 
     public void remove() {
-        cl.removeClientUI();
+        view.removeUI();
         var map = Map.getInstance();
         map.removeAt(this);
     }

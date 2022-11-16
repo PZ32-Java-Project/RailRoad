@@ -1,5 +1,6 @@
 package views;
 
+import abstractions.IViewable;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 
@@ -7,7 +8,7 @@ import models.Exit;
 import shared.Constants;
 import shared.Global;
 
-public class ExitView {
+public class ExitView implements IViewable {
     private Exit exit;
     private Circle circle;
 
@@ -15,7 +16,7 @@ public class ExitView {
         this.exit = exit;
     }
 
-    public void addUi() {
+    public void updateUI() {
         var grayColor = Color.rgb(240, 240, 240);
         circle = new Circle(Constants.entranceSize, grayColor);
         circle.setStroke(grayColor);

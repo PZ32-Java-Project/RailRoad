@@ -13,19 +13,22 @@ public class CashRegistry extends Position {
     protected Line line;
     protected int id;
     protected boolean onPause;
+
     public CashRegistry(int x, int y, String name, int id) {
         super(x, y);
         this.name = name;
         this.id = id;
         line = new Line(id);
         onPause = false;
-        CashRegistryView.updateCashRegistryUI(this);
+        var view = new CashRegistryView(this);
+        view.updateUI();
     }
     public CashRegistry(int x, int y, String name, Line line) {
         super(x, y);
         this.name = name;
         this.line = line;
-        CashRegistryView.updateCashRegistryUI(this);
+        var view = new CashRegistryView(this);
+        view.updateUI();
     }
 
     public Line getLine() {

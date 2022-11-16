@@ -11,14 +11,14 @@ import static shared.Constants.entranceSize;
 
 public class Entrance extends Position {
     private String name;
-    private EntranceView entranceView = new EntranceView();
+    private EntranceView entranceView = new EntranceView(this);
     public Entrance(int x, int y, String name) {
         super(x, y);
         this.name = name;
-        entranceView.updateEntranceView(this);
+        entranceView.updateUI();
     }
     public void remove(){
-        entranceView.removeEntranceFromUI();
+        entranceView.removeUI();
         var map = Map.getInstance();
         map.removeAt(this);
     }

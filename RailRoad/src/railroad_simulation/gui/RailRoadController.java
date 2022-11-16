@@ -1,6 +1,5 @@
 package railroad_simulation.gui;
 
-import abstractions.Position;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -8,8 +7,6 @@ import models.Client;
 import models.Hall;
 import shared.Global;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class RailRoadController {
@@ -123,8 +120,8 @@ public class RailRoadController {
                     .stream()
                     .peek(client ->
                             ((Client) client)
-                            .getCl()
-                            .getClientCircle()
+                            .getView()
+                            .getCircle()
                             .setOnMouseEntered( en -> {
                                 clientInfoField.setText(client.toString());
                             })).collect(Collectors.toList());

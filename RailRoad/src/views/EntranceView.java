@@ -1,5 +1,6 @@
 package views;
 
+import abstractions.IViewable;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import models.Entrance;
@@ -7,27 +8,24 @@ import models.Entrance;
 import static shared.Constants.entranceSize;
 import static shared.Global.pane;
 
-public class EntranceView {
-    private Circle entranceCircle;
+public class EntranceView implements IViewable {
+    private Entrance entrance;
+    private Circle circle;
 
-    public Circle getEntranceCircle() {
-        return entranceCircle;
+    public EntranceView(Entrance entrance) {
+        this.entrance = entrance;
     }
 
-    public void setEntranceCircle(Circle entranceCircle) {
-        this.entranceCircle = entranceCircle;
-    }
-
-    public void updateEntranceView(Entrance entrance){
+    public void updateUI(){
         Color myGray = Color.rgb(240, 240, 240);
-        entranceCircle = new Circle(entranceSize, Color.ORANGE);
-        entranceCircle.setStroke(myGray);
-        entranceCircle.setTranslateX(entrance.getX());
-        entranceCircle.setTranslateY(entrance.getY());
-        entranceCircle.setFill(myGray);
-        pane.getChildren().add(entranceCircle);
+        circle = new Circle(entranceSize, Color.ORANGE);
+        circle.setStroke(myGray);
+        circle.setTranslateX(entrance.getX());
+        circle.setTranslateY(entrance.getY());
+        circle.setFill(myGray);
+        pane.getChildren().add(circle);
     }
-    public void removeEntranceFromUI(){
-        pane.getChildren().remove(entranceCircle);
+    public void removeUI(){
+        pane.getChildren().remove(circle);
     }
 }

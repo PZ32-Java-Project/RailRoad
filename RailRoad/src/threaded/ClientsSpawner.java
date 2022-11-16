@@ -51,7 +51,6 @@ public class ClientsSpawner extends Thread{
                             Platform.runLater(() -> client.updateUI());
                             Optional<CashRegistry> cashRegistryOptional = findCashRegistry(cashRegistries, client);
                             var cashRegistry = cashRegistryOptional.stream().findFirst().orElse(null);
-                        //moveClient(client, cashRegistry);
                             map.getPositions().add(client);
                             var cashLine = cashRegistry.getLine();
                             cashLine.tryAdd(client);
