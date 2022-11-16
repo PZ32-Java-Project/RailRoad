@@ -22,13 +22,15 @@ public class CashRegistry extends Position {
         this.id = id;
         line = new Line(id);
         onPause = false;
-        CashRegistryView.updateCashRegistryUI(this);
+        var view = new CashRegistryView(this);
+        view.updateUI();
     }
     public CashRegistry(int x, int y, String name, Line line) {
         super(x, y);
         this.name = name;
         this.line = line;
-        CashRegistryView.updateCashRegistryUI(this);
+        var view = new CashRegistryView(this);
+        view.updateUI();
     }
 
     public Line getLine() {
@@ -71,7 +73,7 @@ public class CashRegistry extends Position {
         int i = 0;
         for (var client:line.getClients()){
             var targetPosition =  findVacant(i);
-            var clientMover = new ClientMover(client, targetPosition);
+            var clientMover = new ClientMover(client, targetPosition, false);
             i++;
             clientMover.start();
         }

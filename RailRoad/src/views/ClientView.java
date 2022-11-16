@@ -1,25 +1,26 @@
 package views;
 
-import javafx.scene.layout.Pane;
+import abstractions.IViewable;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import models.Client;
 import static shared.Global.pane;
 
-public class ClientView {
-    private Circle clientCircle;
+public class ClientView implements IViewable {
+    private Client client;
+    private Circle circle;
 
-    public Circle getClientCircle() {
-        return clientCircle;
+    public ClientView(Client client) {
+        this.client = client;
     }
 
-    public void setClientCircle(Circle clientCircle) {
-        this.clientCircle = clientCircle;
+    public Circle getCircle() {
+        return circle;
     }
-    public void updateClientUI(Client client){
-        if (clientCircle != null) {
-            pane.getChildren().remove(clientCircle);
-        }
+
+    public void updateUI(){
+        removeUI();
+
         Color color;
         switch (client.getClientType()){
             case Veteran -> color=Color.OLIVE;
@@ -27,16 +28,16 @@ public class ClientView {
             case WithBaby -> color=Color.HOTPINK;
             default -> color=Color.BLUE;
         }
-        clientCircle = new Circle(5, color);
-        clientCircle.setStroke(color);
-        clientCircle.setTranslateX(client.getX());
-        clientCircle.setTranslateY(client.getY());
-        clientCircle.setFill(color);
-        pane.getChildren().add(clientCircle);
+        circle = new Circle(5, color);
+        circle.setStroke(color);
+        circle.setTranslateX(client.getX());
+        circle.setTranslateY(client.getY());
+        pane.getChildren().add(circle);
     }
-    public void removeClientUI(){
-        if (clientCircle != null) {
-            pane.getChildren().remove(clientCircle);
+
+    public void removeUI(){
+        if (circle != null) {
+            pane.getChildren().remove(circle);
         }
     }
 }

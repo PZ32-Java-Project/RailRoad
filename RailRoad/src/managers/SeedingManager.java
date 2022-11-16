@@ -2,7 +2,6 @@ package managers;
 
 import abstractions.ISeedingManager;
 import abstractions.Position;
-import javafx.scene.layout.Pane;
 import models.*;
 
 import java.awt.*;
@@ -96,6 +95,13 @@ public class SeedingManager implements ISeedingManager {
             cashRegistries.add(generateCashRegistry(isRight));
         }
         return cashRegistries;
+    }
+
+    public Exit generateExit() {
+        var rand = new Random();
+        int x = rand.nextInt(exitRadius, MAP_WIDTH - exitRadius);
+        int y = MAP_HEIGHT;
+        return new Exit(x, y);
     }
 
     public ReserveCashRegistry generateReserveCashRegistry(){
