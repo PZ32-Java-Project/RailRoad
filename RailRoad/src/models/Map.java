@@ -1,6 +1,7 @@
 package models;
 
 import abstractions.Position;
+import javafx.geometry.Pos;
 import shared.Constants;
 import shared.Global;
 import java.util.ArrayList;
@@ -45,7 +46,15 @@ public class Map {
         return positions.stream().filter(c -> c instanceof Entrance).collect(Collectors.toList());
     }
     public List<Position> getCashRegistries(){
-        return positions.stream().filter(c -> c instanceof CashRegistry).collect(Collectors.toList());
+        return positions.stream()
+                .filter(c -> c instanceof CashRegistry).collect(Collectors.toList());
+    }
+    public List<Position> getAvailableCashRegistries() {
+        return positions.stream()
+                .filter(p -> p instanceof CashRegistry)
+                .map(p -> (CashRegistry)p)
+                .filter(c -> !c.onPause)
+                .collect(Collectors.toList());
     }
     public void setData(List<Position> positions){
         this.positions=positions;

@@ -44,7 +44,7 @@ public class ClientsSpawner extends Thread{
                     else if (clientsCount < clientsLimit * 0.7)
                         enableSpawning = true;
                     if (enableSpawning) {
-                            var cashRegistries = map.getCashRegistries();
+                            var cashRegistries = map.getAvailableCashRegistries();
                             var clientsList = map.getClients();
                             var entrancesList = map.getEntrances();
                             var client = seedingManager.generateClient(clientsList, entrancesList);
@@ -90,7 +90,8 @@ public class ClientsSpawner extends Thread{
 
     public Optional<CashRegistry> findCashRegistry(List<Position> cashRegistries, Client client){
         List<CashRegistry> cashRegistriesList = (List<CashRegistry>)(List<?>) cashRegistries;
-        var minLineSize =  (cashRegistries.stream().map(c->((CashRegistry)c).getLine().getClients().size())
+        var minLineSize =  (cashRegistries.stream()
+                .map(c->((CashRegistry)c).getLine().getClients().size())
                 .min(Comparator.naturalOrder()))
                 .stream().findFirst().orElse(0);
         var closestCash  = cashRegistriesList.stream()

@@ -14,7 +14,6 @@ import static shared.Constants.*;
 // TODO: create some seed data, add factory pattern
 public class SeedingManager implements ISeedingManager {
     private List<Point> usedPositions;
-    private boolean generatedReserveRegistry = false;
     private static int currentClientId = 0;
     private static int currentCashRegistryId = 0;
     private static char currentEntranceSymbol = 'A';
@@ -105,22 +104,19 @@ public class SeedingManager implements ISeedingManager {
     }
 
     public ReserveCashRegistry generateReserveCashRegistry(){
-        if(generatedReserveRegistry == false){
-            Random rand = new Random();
-            int x = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
-            int y = 0;
-            while(true){
-                if(CheckPositions(x, y, cashRegistryWidth)) break;
-                /*x = 0;
-                y = rand.nextInt(cashRegistryWidth, MAP_HEIGHT - cashRegistryWidth);*/
+        Random rand = new Random();
+        int x = MAP_WIDTH - cashRegistryWidth * 2;
+        int y;
+        while (true) {
+            y = rand.nextInt(cashRegistryWidth, MAP_WIDTH - cashRegistryWidth);
+            if (CheckPositions(x, y, cashRegistryWidth)) {
+                break;
             }
-            usedPositions.add(new Point(x, y));
-            ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "ReserveRegistry", 0);
-
-            return cashRegistry;
-        }else{
-            return null;
         }
+        usedPositions.add(new Point(x, y));
+        ReserveCashRegistry cashRegistry = new ReserveCashRegistry(x, y, "Reserve registry", 0);
+
+        return cashRegistry;
     }
 
     private CashRegistry generateCashRegistry(boolean isRight) {

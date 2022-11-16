@@ -36,6 +36,7 @@
             <Slider fx:id="servingSlider" blockIncrement="3.0" layoutX="15.0" layoutY="285.0" majorTickUnit="2.0" max="15.0" min="1.0" minorTickCount="5" prefHeight="37.0" prefWidth="199.0" showTickLabels="true" showTickMarks="true" style="-fx-text-fill: rgb(76, 76, 158 );" value="8.0" />
             <Separator layoutX="13.0" layoutY="92.0" prefWidth="200.0" style="-fx-text-fill: rgb(76, 76, 158 ); -fx-background-color: rgb(100, 100, 240);" />
             <Button fx:id="stopButton" layoutX="117.0" layoutY="334.0" mnemonicParsing="false" onKeyPressed="#Clear" onMousePressed="#Clear" style="-fx-text-fill: rgb(76, 76, 158 ); -fx-border-color: rgb(76, 76, 158 ); -fx-background-color: rgb(240, 228, 198); -fx-border-radius: 3;" text="Стоп" />
+            <Button fx:id="clButton" layoutX="117.0" layoutY="334.0" mnemonicParsing="false" onKeyPressed="#Clear" onMousePressed="#Clear" style="-fx-text-fill: rgb(76, 76, 158 ); -fx-border-color: rgb(76, 76, 158 ); -fx-background-color: rgb(240, 228, 198); -fx-border-radius: 3;" text="Стоп" />
             <Button fx:id="setButton" layoutX="58.0" layoutY="334.0" mnemonicParsing="false" onKeyPressed="#Clear" onMousePressed="#setManualModeSettings" style="-fx-background-color: rgb(240, 228, 198); -fx-text-fill: rgb(76, 76, 158 ); -fx-border-color: rgb(76, 76, 158 ); -fx-border-radius: 3;" text="Задати" />
             <TextArea fx:id="clientInfoField" layoutX="10.0" layoutY="367.0" prefHeight="124.0" prefWidth="205.0" style="-fx-background-color: rgb(252, 245, 221);" />
          </children>

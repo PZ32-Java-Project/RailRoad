@@ -51,6 +51,7 @@ public class Hall {
         Constants.cashRegistryServeTime = cashRegistryServeTime;
         Lock lock = new ReentrantLock();
         generateCashRegistries();
+        generateReserveCashRegistry();
         generateCashEntrances();
         generateExit();
         spawnClients(lock);
@@ -79,6 +80,12 @@ public class Hall {
         var exit = seedingManager.generateExit();
         var result = map.tryAdd(exit);
         MyFileWritter.Write(result ? "Exit was added successfully" : "Couldn't add an exit");
+    }
+
+    public void generateReserveCashRegistry() {
+        var reserveCashRegistry = seedingManager.generateReserveCashRegistry();
+        var result = map.tryAdd(reserveCashRegistry);
+        MyFileWritter.Write(result ? "Reserve cash registry was added successfully" : "Couldn't add reserve registry");
     }
 
     public void generateCashRegistries(){
