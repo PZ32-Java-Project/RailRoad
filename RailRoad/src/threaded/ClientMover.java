@@ -4,28 +4,27 @@ import abstractions.Position;
 import javafx.application.Platform;
 
 import models.Client;
-import shared.Global;
-import views.ClientView;
 
 import static shared.MyFileWritter.Write;
 
 public class ClientMover extends Thread{
-    Client client;
-    Position currentPosition;
-    Position targetPosition;
+    private Client client;
+    private Position currentPosition;
+    private Position targetPosition;
+    private boolean isRemoveOnArrival;
 
-    public ClientMover (Client client, Position targetPosition) {
+    public ClientMover (Client client, Position targetPosition, boolean isRemoveOnArrival) {
         this.client = client;
         this.currentPosition = client;
         this.targetPosition = targetPosition;
+        this.isRemoveOnArrival = isRemoveOnArrival;
     }
 
     public void run() {
         while (!currentPosition.isPosition(targetPosition)) {
             // Make one step towards target position
-            //if()
-                makeStep();
-                Platform.runLater(() -> client.updateUI());
+            makeStep();
+            Platform.runLater(() -> client.updateUI());
 
             // Sleep 0.005 second
             try {
@@ -35,6 +34,10 @@ public class ClientMover extends Thread{
                 System.out.println("Error while trying to move a client: ");
                 e.printStackTrace();
             }
+        }
+
+        if (isRemoveOnArrival) {
+            Platform.runLater(() -> client.remove());
         }
     }
 

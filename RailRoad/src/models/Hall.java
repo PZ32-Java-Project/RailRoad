@@ -6,6 +6,7 @@ import abstractions.Position;
 import managers.InputManager;
 import managers.SeedingManager;
 import shared.Constants;
+import shared.MyFileWritter;
 import threaded.ClientServer;
 import threaded.ClientsSpawner;
 
@@ -39,6 +40,7 @@ public class Hall {
         Lock lock = new ReentrantLock();
         generateCashRegistries();
         generateCashEntrances();
+        generateExit();
         spawnClients(lock);
         initializeServing(lock);
     }
@@ -60,6 +62,11 @@ public class Hall {
         }
     }
 
+    public void generateExit() {
+        var exit = seedingManager.generateExit();
+        var result = map.tryAdd(exit);
+        MyFileWritter.Write(result ? "Exit was added successfully" : "Couldn't add an exit");
+    }
 
     public void generateCashRegistries(){
         var cashRegistries =  seedingManager.generateCashRegistries(cashRegistriesCount);
@@ -75,12 +82,6 @@ public class Hall {
         Constants.entranceCount = inputManager.getEntranceCount();
         cashRegistriesCount = inputManager.getCashRegistriesCount();
         Constants.cashRegistryServeTime = inputManager.getCashRegistryServeTime();
-    }
-
-    public void seedData() {
-        // Call seedingManager here:
-        // var cashRegistries = seedingManager.generateCashRegistries(Constants.cashRegistriesCount);
-        // map.tryAdd(cashRegistries.get(0));
     }
 
     public Map getMap(){

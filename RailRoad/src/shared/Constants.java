@@ -17,6 +17,7 @@ public class Constants {
     public static int cashRegistryHeight = 10;
     public static int cashRegistryWidth = 10;
     public static int entranceSize = 10;
+    public static int exitRadius = 15;
 
     public static final String[] names = {"Vlad", "Andrew", "Oleg", "Dmytro", "Halyna",
             "Maria", "Olena", "Olexander", "Denis", "Maxim"};

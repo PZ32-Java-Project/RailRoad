@@ -2,7 +2,9 @@ package threaded;
 
 import javafx.application.Platform;
 import models.CashRegistry;
+import models.Exit;
 import models.Hall;
+import models.Map;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,6 +14,7 @@ import static shared.MyFileWritter.Write;
 
 public class ClientServer extends Thread{
     private CashRegistry cashRegistry;
+    private Exit exit;
     private Hall hall;
     private Lock lock;
     private int interval;
@@ -20,6 +23,7 @@ public class ClientServer extends Thread{
         this.hall=hall;
         this.lock=lock;
         this.interval=interval;
+        this.exit = Map.getInstance().getExit();
     }
     public void run(){
         var map = hall.getMap();
@@ -67,14 +71,17 @@ public class ClientServer extends Thread{
                         if(hall.isTerminate()) {
                             cashRegistry.setLine(null);
                         }
+
+                        // Retrieve client
                         var line = cashRegistry.getLine();
                         var client = line.getClients().poll();
-                        var pos = map.getPositions();
-                        pos.remove(client);
-
-                            //Dodo:    Зробити біг на вихід
-                        Platform.runLater(() -> client.remove());
                         cashRegistry.updatedLineUI();
+
+                        // Move to an exit
+                        var clientMover = new ClientMover(client, exit, true);
+
+                        clientMover.start();
+
                         Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
                         System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
                     }

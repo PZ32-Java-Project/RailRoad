@@ -90,12 +90,6 @@ public class ClientsSpawner extends Thread{
         }
     }
 
-    private void moveClient(Client client, CashRegistry cashRegistry) {
-        var clientTargetPosition = cashRegistry.findVacantPositionOnTail();
-        var clientMover = new ClientMover(client, clientTargetPosition);
-        clientMover.start();
-    }
-
     public Optional<CashRegistry> findCashRegistry(List<Position> cashRegistries, Client client){
         List<CashRegistry> cashRegistriesList = (List<CashRegistry>)(List<?>) cashRegistries;
         var minLineSize =  (cashRegistries.stream().map(c->((CashRegistry)c).getLine().getClients().size())

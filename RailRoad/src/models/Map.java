@@ -58,4 +58,11 @@ public class Map {
     public void removeAt(Position position) {
         positions.remove(position);
     }
+
+    public Exit getExit() {
+        return (Exit)positions.stream()
+                .filter(p -> p instanceof Exit)
+                .findFirst()
+                .orElse(null);
+    }
 }

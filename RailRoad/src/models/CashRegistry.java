@@ -60,7 +60,7 @@ public class CashRegistry extends Position {
         int i = 0;
         for (var client:line.getClients()){
             var targetPosition =  findVacant(i);
-            var clientMover = new ClientMover(client, targetPosition);
+            var clientMover = new ClientMover(client, targetPosition, false);
             i++;
             clientMover.start();
         }
