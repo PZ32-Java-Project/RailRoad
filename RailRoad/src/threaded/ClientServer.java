@@ -25,80 +25,96 @@ public class ClientServer extends Thread{
     public void run(){
         var hall = Hall.getInstance();
         //Edit for priority queue
-        while (!cashRegistry.isOnPause() || (cashRegistry instanceof ReserveCashRegistry)) {
-            var isNull = false;
-            var isNotEmpty = false;
-            try {
-                lock.lock();
-                isNull = cashRegistry.getLine().getClients() != null;
-                isNotEmpty = cashRegistry.getLine().getClients().size() > 0;
-            } finally {
-                lock.unlock();
+        while (true) {
+            var lol =  (CashRegistry)(hall.getMap().getCashRegistries().get(0));
+            if(cashRegistry.getName()==lol.getName())
+            {
+                var a= 10;
             }
-            if (isNull){
-                if (isNotEmpty) {
-                    var line = cashRegistry.getLine();
-                    var client = line.getClients().peek();
-                    try {
-                        var ticketsCount =  cashRegistry.getLine().getClients().peek().getTicketsCount();
-                        if(hall.isTerminate()){
-                            Write("ClientServer "+ cashRegistry.getId() +" has stopped");
-                            System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
-                            return;
-                        }
-
-                        if(interval==-1) {
-                            var random = new Random();
-                            sleep((random.nextInt(2500)+5000)*ticketsCount);
-                        }
-                        else{
-                            sleep(interval);
-                        }
-                        if(hall.isTerminate()){
-                            Write("ClientServer "+ cashRegistry.getId() +" has stopped");
-                            System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
-                            return;
-                        }
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
-                        lock.lock();
-                        if(hall.isTerminate()) {
-                            cashRegistry.setLine(null);
-                        }
-
-                        // Retrieve client
-                      //  var line = cashRegistry.getLine();
-                       //  client = line.getClients().poll();
-                         line.getClients().remove(client);
-                        cashRegistry.updatedLineUI();
-
-                        // Move to an exit
-                        var clientMover = new ClientMover(client, exit, true);
+            if(!cashRegistry.isOnPause() || (cashRegistry instanceof ReserveCashRegistry)) {
+                var isNull = false;
+                var isNotEmpty = false;
+                try {
+                    lock.lock();
+                    isNull = cashRegistry.getLine().getClients() != null;
+                    isNotEmpty = cashRegistry.getLine().getClients().size() > 0;
+                } finally {
+                    lock.unlock();
+                }
+                if (isNull) {
+                    if (isNotEmpty) {
+                        var line = cashRegistry.getLine();
+                        var client = line.getClients().peek();
                         try {
-                            client.setStopMoving(true);
-                            sleep(7);
-                            client.setStopMoving(false);
+                            var ticketsCount = cashRegistry.getLine().getClients().peek().getTicketsCount();
+                            if (hall.isTerminate()) {
+                                Write("ClientServer " + cashRegistry.getId() + " has stopped");
+                                System.out.println("ClientServer " + cashRegistry.getId() + " has stopped");
+                                return;
+                            }
+
+                            if (interval == -1) {
+                                var random = new Random();
+                                sleep((random.nextInt(2500) + 5000) * ticketsCount);
+                            } else {
+                                sleep(interval);
+                            }
+                            if (hall.isTerminate()) {
+                                Write("ClientServer " + cashRegistry.getId() + " has stopped");
+                                System.out.println("ClientServer " + cashRegistry.getId() + " has stopped");
+                                return;
+                            }
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
-                        clientMover.start();
+                        try {
+                            lock.lock();
+                            if (hall.isTerminate()) {
+                                cashRegistry.setLine(null);
+                            }
 
-                        Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
-                        System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
-                    }
-                    finally {
-                        lock.unlock();
+                            // Retrieve client
+                            //  var line = cashRegistry.getLine();
+                            //  client = line.getClients().poll();
+                            line.getClients().remove(client);
+                            cashRegistry.updatedLineUI();
+
+                            // Move to an exit
+                            var clientMover = new ClientMover(client, exit, true);
+                            try {
+                                client.setStopMoving(true);
+                                sleep(7);
+                                client.setStopMoving(false);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            clientMover.start();
+
+                            Write("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
+                            System.out.println("client " + client.getName() + " served at cash registry :" + cashRegistry.getName());
+                        } finally {
+                            lock.unlock();
+                        }
                     }
                 }
-            }
-            try {
-                sleep(100);
+                if(!isNull){
+                    var a= 10;
+                }
+                try {
+                    sleep(100);
 
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else {
+                var clients = cashRegistry.getLine().getClients();
+                var reserve = hall.getMap().getReserveCashRegistry();
+                reserve.getLine().getClients().addAll(clients);
+                reserve.updatedLineUI();
+                cashRegistry.updatedLineUI();
+                cashRegistry.getLine().getClients().clear();
+            }
             }
         }
     }
-}
