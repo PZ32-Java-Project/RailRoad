@@ -1,10 +1,7 @@
 package threaded;
 
 import javafx.application.Platform;
-import models.CashRegistry;
-import models.Exit;
-import models.Hall;
-import models.Map;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,14 +24,8 @@ public class ClientServer extends Thread{
     }
     public void run(){
         var hall = Hall.getInstance();
-        var map = hall.getMap();
-        if(hall.isTerminate()) {
-            /*cashRegistry.getLine().getClients().clear();
-            int k = cashRegistry.getLine().getClients().size();*/
-            //this.stop();
-        }
         //Edit for priority queue
-        while (!cashRegistry.isOnPause()) {
+        while (!cashRegistry.isOnPause() || (cashRegistry instanceof ReserveCashRegistry)) {
             var isNull = false;
             var isNotEmpty = false;
             try {

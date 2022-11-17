@@ -74,6 +74,9 @@ public class Hall {
             var thread = new ClientServer((CashRegistry)cashRegistry , lock, cashRegistryServeTime); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
             thread.start();
         }
+            var thread = new ClientServer(map.getReserveCashRegistry() , lock, cashRegistryServeTime); // -1 Для рандомного інтервалу спавна, інакше в мілісекундах
+            thread.start();
+
     }
 
     public void generateExit() {
