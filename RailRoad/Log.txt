@@ -857,3 +857,323 @@ client Dmytro spawned at: 307,0 2022-11-16T20:06:24.876701700
 client Maxim spawned at: 321,0 2022-11-16T20:06:26.388963200
 client Maria spawned at: 90,0 2022-11-16T20:06:27.902309800
 client Maria spawned at: 321,0 2022-11-16T20:06:29.413273800
+Reserve cash registry was added successfully 2022-11-17T08:57:54.261664500
+Exit was added successfully 2022-11-17T08:57:54.302557600
+client Denis spawned at: 322,0 2022-11-17T08:57:54.388329700
+client Oleg spawned at: 162,0 2022-11-17T08:57:55.898287200
+client Andrew spawned at: 162,0 2022-11-17T08:57:57.407812
+client Denis spawned at: 275,0 2022-11-17T08:57:58.920790200
+client Olena spawned at: 162,0 2022-11-17T08:58:00.433214700
+client Dmytro spawned at: 162,0 2022-11-17T08:58:01.945505400
+client Andrew served at cash registry :Cash Registry C 2022-11-17T08:58:03.460694500
+client Dmytro spawned at: 322,0 2022-11-17T08:58:03.469674700
+client Denis spawned at: 275,0 2022-11-17T08:58:04.980104200
+client Olena spawned at: 162,0 2022-11-17T08:58:06.490891
+client Denis served at cash registry :Cash Registry B 2022-11-17T08:58:07.120909500
+client Halyna spawned at: 162,0 2022-11-17T08:58:08.000946500
+client Denis spawned at: 275,0 2022-11-17T08:58:09.511615400
+client Olexander spawned at: 322,0 2022-11-17T08:58:11.022925
+client Denis served at cash registry :Cash Registry C 2022-11-17T08:58:11.068357400
+client Oleg served at cash registry :Cash Registry A 2022-11-17T08:58:12.054891600
+client Maria spawned at: 275,0 2022-11-17T08:58:12.534979900
+client Maxim spawned at: 162,0 2022-11-17T08:58:14.046020400
+client Vlad spawned at: 275,0 2022-11-17T08:58:15.556578900
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T08:58:16.220350400
+client Andrew spawned at: 162,0 2022-11-17T08:58:17.069043100
+client Halyna served at cash registry :Cash Registry B 2022-11-17T08:58:17.623458500
+client Dmytro spawned at: 275,0 2022-11-17T08:58:18.581439900
+client Oleg spawned at: 275,0 2022-11-17T08:58:20.093779200
+client Maxim served at cash registry :Cash Registry C 2022-11-17T08:58:21.494509700
+client Oleg spawned at: 274,1 2022-11-17T08:58:21.603637700
+client Olena served at cash registry :Cash Registry A 2022-11-17T08:58:22.994126600
+client Olena spawned at: 275,0 2022-11-17T08:58:23.116335800
+Reserve cash registry was added successfully 2022-11-17T09:00:17.442313800
+Exit was added successfully 2022-11-17T09:00:17.452284300
+client Vlad spawned at: 220,0 2022-11-17T09:00:17.482201400
+client Oleg spawned at: 424,0 2022-11-17T09:00:18.993030700
+client Olexander spawned at: 424,0 2022-11-17T09:00:20.502203
+client Olena spawned at: 220,0 2022-11-17T09:00:22.012044
+client Maria spawned at: 220,0 2022-11-17T09:00:23.523255800
+client Maria spawned at: 350,0 2022-11-17T09:00:25.035602600
+client Maxim spawned at: 424,0 2022-11-17T09:00:26.545309
+client Halyna spawned at: 350,0 2022-11-17T09:00:28.056880
+client Halyna spawned at: 220,0 2022-11-17T09:00:29.568237400
+client Dmytro spawned at: 424,0 2022-11-17T09:00:31.080319500
+client Vlad served at cash registry :Cash Registry A 2022-11-17T09:00:31.544912200
+client Andrew spawned at: 220,0 2022-11-17T09:00:32.591119700
+client Maria spawned at: 220,0 2022-11-17T09:00:34.102513400
+client Halyna served at cash registry :Cash Registry C 2022-11-17T09:00:34.453946700
+client Maria spawned at: 350,0 2022-11-17T09:00:35.614044400
+client Maria served at cash registry :Cash Registry B 2022-11-17T09:00:36.083549800
+client Andrew spawned at: 424,0 2022-11-17T09:00:37.124027300
+client Maria spawned at: 220,0 2022-11-17T09:00:38.635120700
+client Olena spawned at: 424,0 2022-11-17T09:00:40.148272
+client Maria spawned at: 349,1 2022-11-17T09:00:41.659811700
+client Halyna spawned at: 349,1 2022-11-17T09:00:43.170279800
+client Andrew spawned at: 220,0 2022-11-17T09:00:44.680503600
+client Halyna served at cash registry :Cash Registry C 2022-11-17T09:00:45.887724700
+client Denis spawned at: 350,0 2022-11-17T09:00:46.190913700
+client Halyna spawned at: 350,0 2022-11-17T09:00:47.702057400
+client Dmytro spawned at: 219,1 2022-11-17T09:00:49.212324400
+client Maria served at cash registry :Cash Registry B 2022-11-17T09:00:50.227372900
+client Maxim spawned at: 350,0 2022-11-17T09:00:50.723579200
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:00:51.871244200
+client Olena spawned at: 424,0 2022-11-17T09:00:52.234587500
+client Andrew spawned at: 220,0 2022-11-17T09:00:53.745113500
+client Andrew served at cash registry :Cash Registry A 2022-11-17T09:00:54.139215700
+client Denis spawned at: 424,0 2022-11-17T09:00:55.257210500
+client Andrew spawned at: 350,0 2022-11-17T09:00:56.767917900
+client Denis spawned at: 350,0 2022-11-17T09:00:58.281830800
+client Maria served at cash registry :Cash Registry C 2022-11-17T09:00:58.842131400
+client Dmytro spawned at: 424,0 2022-11-17T09:00:59.793821500
+client Andrew served at cash registry :Cash Registry A 2022-11-17T09:01:01.031729600
+client Vlad spawned at: 220,0 2022-11-17T09:01:01.304329600
+client Dmytro spawned at: 350,0 2022-11-17T09:01:02.819264500
+client Maria spawned at: 423,1 2022-11-17T09:01:04.332563900
+client Andrew spawned at: 219,1 2022-11-17T09:01:05.844186300
+client Maria served at cash registry :Cash Registry B 2022-11-17T09:01:06.110787
+client Maria spawned at: 220,0 2022-11-17T09:01:07.357145700
+client Maxim spawned at: 350,0 2022-11-17T09:01:08.871480800
+client Vlad spawned at: 219,1 2022-11-17T09:01:10.384844900
+client Andrew served at cash registry :Cash Registry C 2022-11-17T09:01:10.784151600
+client Andrew spawned at: 350,0 2022-11-17T09:01:11.897835500
+client Maxim spawned at: 219,1 2022-11-17T09:01:13.413271600
+client Maxim spawned at: 349,1 2022-11-17T09:01:14.924350900
+client Oleg spawned at: 423,1 2022-11-17T09:01:16.438149200
+client Vlad spawned at: 350,0 2022-11-17T09:01:17.953899700
+client Andrew spawned at: 424,0 2022-11-17T09:01:19.468325
+client Maxim served at cash registry :Cash Registry A 2022-11-17T09:01:20.402017600
+client Vlad spawned at: 424,0 2022-11-17T09:01:20.981185200
+client Olexander spawned at: 424,0 2022-11-17T09:01:22.494359200
+client Maria spawned at: 424,0 2022-11-17T09:01:24.006094700
+client Oleg spawned at: 424,0 2022-11-17T09:01:25.517540700
+client Olexander spawned at: 220,0 2022-11-17T09:01:27.029594600
+client Maxim served at cash registry :Cash Registry C 2022-11-17T09:01:27.230389500
+client Dmytro spawned at: 424,0 2022-11-17T09:01:28.541145800
+client Oleg served at cash registry :Cash Registry B 2022-11-17T09:01:28.640612400
+client Andrew spawned at: 219,1 2022-11-17T09:01:30.054416
+client Maxim spawned at: 220,0 2022-11-17T09:01:31.566546400
+client Oleg spawned at: 220,0 2022-11-17T09:01:33.078442500
+client Andrew spawned at: 220,0 2022-11-17T09:01:34.591777800
+client Oleg spawned at: 220,0 2022-11-17T09:01:36.103719600
+client Olexander spawned at: 424,0 2022-11-17T09:01:37.614969600
+client Andrew served at cash registry :Cash Registry A 2022-11-17T09:01:41.578997700
+client Vlad served at cash registry :Cash Registry C 2022-11-17T09:01:42.908557800
+client Andrew served at cash registry :Cash Registry B 2022-11-17T09:01:47.577905700
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:01:57.819957700
+client Halyna served at cash registry :Cash Registry B 2022-11-17T09:02:03.020944500
+client Vlad served at cash registry :Cash Registry A 2022-11-17T09:02:03.320759100
+client Maxim served at cash registry :Cash Registry A 2022-11-17T09:02:10.471699
+client Olexander served at cash registry :Cash Registry C 2022-11-17T09:02:11.690125
+client Vlad served at cash registry :Cash Registry B 2022-11-17T09:02:17.549702200
+client Andrew served at cash registry :Cash Registry C 2022-11-17T09:02:26.266339100
+client Dmytro served at cash registry :Cash Registry A 2022-11-17T09:02:27.812695400
+client Maria served at cash registry :Cash Registry B 2022-11-17T09:02:30.897671300
+ClientServer 0 has stopped 2022-11-17T09:02:32.129845200
+Spawner has stopped 2022-11-17T09:02:33.136664900
+Reserve cash registry was added successfully 2022-11-17T09:02:34.612484200
+Exit was added successfully 2022-11-17T09:02:34.614441500
+client Olena spawned at: 28,0 2022-11-17T09:02:34.624460600
+client Olexander spawned at: 138,0 2022-11-17T09:02:36.136317100
+client Denis spawned at: 308,0 2022-11-17T09:02:37.647126700
+client Oleg spawned at: 138,0 2022-11-17T09:02:39.159679400
+client Andrew spawned at: 308,0 2022-11-17T09:02:40.670158800
+client Maria spawned at: 308,0 2022-11-17T09:02:42.181589400
+client Olena spawned at: 28,0 2022-11-17T09:02:43.692415600
+client Vlad spawned at: 28,0 2022-11-17T09:02:45.205252200
+Reserve cash registry was added successfully 2022-11-17T09:08:25.892703500
+Exit was added successfully 2022-11-17T09:08:25.906623500
+client Dmytro spawned at: 140,0 2022-11-17T09:08:25.946523900
+client Olexander spawned at: 140,0 2022-11-17T09:08:27.458001500
+client Denis spawned at: 180,0 2022-11-17T09:08:28.968476900
+client Andrew spawned at: 180,0 2022-11-17T09:08:30.479188800
+client Oleg spawned at: 357,0 2022-11-17T09:08:31.988613700
+client Olena spawned at: 140,0 2022-11-17T09:08:33.498672
+client Oleg spawned at: 357,0 2022-11-17T09:08:35.009685300
+client Andrew spawned at: 357,0 2022-11-17T09:08:36.521452200
+client Vlad spawned at: 356,1 2022-11-17T09:08:38.035727200
+client Dmytro spawned at: 357,0 2022-11-17T09:08:39.546088900
+client Vlad served at cash registry :Cash Registry B 2022-11-17T09:08:40.040285100
+client Andrew spawned at: 140,0 2022-11-17T09:08:41.058770800
+client Denis spawned at: 357,0 2022-11-17T09:08:42.568862200
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:08:43.855561800
+client Oleg spawned at: 140,0 2022-11-17T09:08:44.081718700
+client Olena spawned at: 180,0 2022-11-17T09:08:45.592490400
+client Halyna spawned at: 140,0 2022-11-17T09:08:47.104615900
+client Olexander spawned at: 139,1 2022-11-17T09:08:48.618061
+client Olexander served at cash registry :Cash Registry A 2022-11-17T09:08:49.464411200
+client Andrew spawned at: 179,1 2022-11-17T09:08:50.130150300
+client Halyna spawned at: 140,0 2022-11-17T09:08:51.641284100
+client Andrew served at cash registry :Cash Registry B 2022-11-17T09:08:53.105529200
+client Dmytro spawned at: 357,0 2022-11-17T09:08:53.154430700
+client Vlad spawned at: 140,0 2022-11-17T09:08:54.665279
+client Halyna spawned at: 180,0 2022-11-17T09:08:56.177302100
+client Olena spawned at: 140,0 2022-11-17T09:08:57.689352900
+client Dmytro spawned at: 140,0 2022-11-17T09:08:59.200589700
+client Maria spawned at: 140,0 2022-11-17T09:09:00.713921200
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:09:02.175396
+client Dmytro spawned at: 356,1 2022-11-17T09:09:02.226924600
+client Halyna spawned at: 180,0 2022-11-17T09:09:03.737459200
+client Maria spawned at: 140,0 2022-11-17T09:09:05.249570200
+client Vlad spawned at: 180,0 2022-11-17T09:09:06.762674400
+client Maria spawned at: 139,1 2022-11-17T09:09:08.274297700
+client Andrew served at cash registry :Cash Registry A 2022-11-17T09:09:08.529498
+client Olexander spawned at: 357,0 2022-11-17T09:09:09.787220200
+client Denis spawned at: 140,0 2022-11-17T09:09:11.300240400
+client Maria served at cash registry :Cash Registry B 2022-11-17T09:09:11.777244400
+client Maria spawned at: 140,0 2022-11-17T09:09:12.814090100
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:09:13.864393800
+client Dmytro spawned at: 356,1 2022-11-17T09:09:14.326874400
+client Vlad spawned at: 180,0 2022-11-17T09:09:15.839968600
+client Olena spawned at: 139,1 2022-11-17T09:09:17.352555200
+client Maria spawned at: 180,0 2022-11-17T09:09:18.866488700
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:09:19.493549
+client Andrew spawned at: 357,0 2022-11-17T09:09:20.379989400
+client Halyna spawned at: 139,1 2022-11-17T09:09:21.893458800
+Reserve cash registry was added successfully 2022-11-17T09:11:39.054046500
+Exit was added successfully 2022-11-17T09:11:39.070003200
+client Vlad spawned at: 31,0 2022-11-17T09:11:39.107909900
+client Denis spawned at: 31,0 2022-11-17T09:11:40.618926800
+client Denis spawned at: 31,0 2022-11-17T09:11:42.129749300
+client Oleg spawned at: 31,0 2022-11-17T09:11:43.640071100
+client Vlad served at cash registry :Cash Registry B 2022-11-17T09:11:44.731519600
+client Maxim spawned at: 59,0 2022-11-17T09:11:45.151698900
+client Maria spawned at: 59,0 2022-11-17T09:11:46.661747800
+client Denis served at cash registry :Cash Registry A 2022-11-17T09:11:47.716219200
+client Dmytro spawned at: 31,0 2022-11-17T09:11:48.172578500
+client Andrew spawned at: 372,0 2022-11-17T09:11:49.684640300
+client Olexander spawned at: 31,0 2022-11-17T09:11:51.194832800
+client Andrew spawned at: 59,0 2022-11-17T09:11:52.706844300
+client Denis spawned at: 59,0 2022-11-17T09:11:54.218041100
+client Halyna spawned at: 59,0 2022-11-17T09:11:55.729375200
+client Olexander spawned at: 372,0 2022-11-17T09:11:57.240108200
+client Vlad spawned at: 372,0 2022-11-17T09:11:58.750852400
+client Vlad spawned at: 58,1 2022-11-17T09:12:00.264539800
+client Oleg spawned at: 372,0 2022-11-17T09:12:01.776428
+client Denis served at cash registry :Cash Registry C 2022-11-17T09:12:03.018300600
+client Halyna spawned at: 372,0 2022-11-17T09:12:03.288833300
+client Maria spawned at: 371,1 2022-11-17T09:12:04.799321700
+client Maxim spawned at: 31,0 2022-11-17T09:12:06.310332500
+client Oleg served at cash registry :Cash Registry B 2022-11-17T09:12:06.669954600
+client Vlad spawned at: 31,0 2022-11-17T09:12:07.822442
+client Maria spawned at: 372,0 2022-11-17T09:12:09.334773900
+client Maria served at cash registry :Cash Registry A 2022-11-17T09:12:09.430243500
+client Vlad served at cash registry :Cash Registry C 2022-11-17T09:12:10.213867
+client Oleg spawned at: 32,1 2022-11-17T09:12:10.846855800
+client Dmytro spawned at: 31,0 2022-11-17T09:12:12.360528
+client Halyna spawned at: 372,0 2022-11-17T09:12:13.872861700
+client Vlad spawned at: 372,0 2022-11-17T09:12:15.385879700
+client Maria served at cash registry :Cash Registry C 2022-11-17T09:12:16.800490100
+client Olexander spawned at: 372,0 2022-11-17T09:12:16.898756500
+client Maria spawned at: 59,0 2022-11-17T09:12:18.410120800
+client Vlad spawned at: 59,0 2022-11-17T09:12:19.922333100
+client Denis spawned at: 31,0 2022-11-17T09:12:21.434615
+client Oleg served at cash registry :Cash Registry C 2022-11-17T09:12:22.706273200
+client Olena spawned at: 371,1 2022-11-17T09:12:22.949058500
+client Andrew spawned at: 31,0 2022-11-17T09:12:24.463094200
+client Dmytro served at cash registry :Cash Registry A 2022-11-17T09:12:25.711445200
+client Maria spawned at: 31,0 2022-11-17T09:12:25.975952700
+client Olena spawned at: 59,0 2022-11-17T09:12:27.487940
+client Olena spawned at: 371,1 2022-11-17T09:12:28.999132800
+client Vlad served at cash registry :Cash Registry B 2022-11-17T09:12:29.280205600
+client Dmytro spawned at: 372,0 2022-11-17T09:12:30.514082800
+client Halyna spawned at: 59,0 2022-11-17T09:12:32.026881500
+client Olena spawned at: 59,0 2022-11-17T09:12:33.541433300
+client Dmytro spawned at: 32,1 2022-11-17T09:12:35.053807700
+client Olena served at cash registry :Cash Registry B 2022-11-17T09:12:36.042666800
+client Halyna spawned at: 31,0 2022-11-17T09:12:36.566498
+client Maria spawned at: 372,0 2022-11-17T09:12:38.078287100
+client Denis spawned at: 59,0 2022-11-17T09:12:39.592458100
+client Vlad served at cash registry :Cash Registry C 2022-11-17T09:12:40.861559600
+client Oleg spawned at: 31,0 2022-11-17T09:12:41.104842600
+client Oleg spawned at: 59,0 2022-11-17T09:12:42.616620500
+client Maxim spawned at: 59,0 2022-11-17T09:12:44.128296300
+client Olena spawned at: 372,0 2022-11-17T09:12:45.640669400
+client Dmytro spawned at: 31,0 2022-11-17T09:12:47.153236300
+client Maria served at cash registry :Cash Registry A 2022-11-17T09:12:47.178206500
+client Maria spawned at: 372,0 2022-11-17T09:12:48.666323900
+client Olena spawned at: 31,0 2022-11-17T09:12:50.179768100
+client Olexander spawned at: 59,0 2022-11-17T09:12:51.692031200
+client Olena served at cash registry :Cash Registry C 2022-11-17T09:12:51.957376100
+client Dmytro served at cash registry :Cash Registry B 2022-11-17T09:12:52.321325200
+client Dmytro served at cash registry :Cash Registry A 2022-11-17T09:12:52.661763800
+client Andrew spawned at: 31,0 2022-11-17T09:12:53.204284600
+client Olena spawned at: 372,0 2022-11-17T09:12:54.717400100
+client Olexander spawned at: 59,0 2022-11-17T09:12:56.229025200
+client Oleg spawned at: 372,0 2022-11-17T09:12:57.738928600
+Reserve cash registry was added successfully 2022-11-17T09:13:24.859460400
+Exit was added successfully 2022-11-17T09:13:24.874420100
+client Vlad spawned at: 292,0 2022-11-17T09:13:24.940245600
+client Maxim spawned at: 292,0 2022-11-17T09:13:26.453158400
+client Denis spawned at: 262,0 2022-11-17T09:13:27.964331900
+client Dmytro spawned at: 460,0 2022-11-17T09:13:29.474394600
+client Olexander spawned at: 262,0 2022-11-17T09:13:30.984187800
+client Vlad served at cash registry :Cash Registry C 2022-11-17T09:13:31.430718300
+client Maxim spawned at: 262,0 2022-11-17T09:13:32.495908700
+client Denis served at cash registry :Cash Registry B 2022-11-17T09:13:33.845385600
+client Dmytro spawned at: 262,0 2022-11-17T09:13:34.006208100
+client Andrew spawned at: 262,0 2022-11-17T09:13:35.517335200
+client Denis spawned at: 262,0 2022-11-17T09:13:37.027704900
+client Maxim spawned at: 460,0 2022-11-17T09:13:38.538778300
+client Oleg spawned at: 262,0 2022-11-17T09:13:40.051332500
+client Dmytro spawned at: 460,0 2022-11-17T09:13:41.562782900
+client Maria spawned at: 262,0 2022-11-17T09:13:43.073921900
+client Maxim served at cash registry :Cash Registry A 2022-11-17T09:13:44.393366
+client Olexander spawned at: 460,0 2022-11-17T09:13:44.586925400
+client Dmytro spawned at: 460,0 2022-11-17T09:13:46.097570900
+client Maria spawned at: 262,0 2022-11-17T09:13:47.610418900
+client Maria spawned at: 292,0 2022-11-17T09:13:49.122703500
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:13:49.978699800
+client Dmytro served at cash registry :Cash Registry B 2022-11-17T09:13:50.279630300
+client Vlad spawned at: 292,0 2022-11-17T09:13:50.633174800
+client Dmytro spawned at: 460,0 2022-11-17T09:13:52.144069300
+client Denis spawned at: 292,0 2022-11-17T09:13:53.656184
+client Olena spawned at: 262,0 2022-11-17T09:13:55.168223400
+client Andrew served at cash registry :Cash Registry B 2022-11-17T09:13:56.141568500
+client Vlad spawned at: 292,0 2022-11-17T09:13:56.680340900
+client Olena spawned at: 459,1 2022-11-17T09:13:58.192105600
+client Andrew spawned at: 292,0 2022-11-17T09:13:59.703333800
+client Oleg spawned at: 291,1 2022-11-17T09:14:01.216848
+client Maxim served at cash registry :Cash Registry C 2022-11-17T09:14:02.293972300
+client Denis served at cash registry :Cash Registry B 2022-11-17T09:14:02.385768200
+client Olexander spawned at: 460,0 2022-11-17T09:14:02.728650800
+client Vlad spawned at: 292,0 2022-11-17T09:14:04.241154600
+client Olexander served at cash registry :Cash Registry A 2022-11-17T09:14:05.444272400
+client Oleg spawned at: 262,0 2022-11-17T09:14:05.755450800
+client Maria spawned at: 460,0 2022-11-17T09:14:07.268633
+client Denis spawned at: 459,1 2022-11-17T09:14:08.780927500
+client Oleg served at cash registry :Cash Registry C 2022-11-17T09:14:09.521135800
+client Andrew spawned at: 261,1 2022-11-17T09:14:10.295210500
+client Dmytro spawned at: 292,0 2022-11-17T09:14:11.809510500
+client Olexander spawned at: 292,0 2022-11-17T09:14:13.322622500
+client Andrew served at cash registry :Cash Registry B 2022-11-17T09:14:14.123370400
+client Dmytro spawned at: 460,0 2022-11-17T09:14:14.836004800
+client Olena served at cash registry :Cash Registry A 2022-11-17T09:14:15.780605200
+client Andrew spawned at: 262,0 2022-11-17T09:14:16.349137100
+client Maria spawned at: 460,0 2022-11-17T09:14:17.863257900
+client Denis spawned at: 262,0 2022-11-17T09:14:19.376027700
+client Vlad spawned at: 460,0 2022-11-17T09:14:20.889368800
+client Maxim spawned at: 291,1 2022-11-17T09:14:22.401552400
+client Olena spawned at: 262,0 2022-11-17T09:14:23.914556400
+client Vlad served at cash registry :Cash Registry C 2022-11-17T09:14:24.142510800
+client Olena spawned at: 460,0 2022-11-17T09:14:25.427251100
+client Denis spawned at: 292,0 2022-11-17T09:14:26.939082100
+client Andrew spawned at: 291,1 2022-11-17T09:14:28.453177200
+client Denis served at cash registry :Cash Registry B 2022-11-17T09:14:29.749158300
+client Andrew served at cash registry :Cash Registry C 2022-11-17T09:14:30.169366500
+client Olena served at cash registry :Cash Registry C 2022-11-17T09:14:35.670644
+client Andrew served at cash registry :Cash Registry B 2022-11-17T09:14:35.738623
+client Olexander served at cash registry :Cash Registry A 2022-11-17T09:14:37.158390900
+client Denis served at cash registry :Cash Registry A 2022-11-17T09:14:44.653108200
+client Maxim served at cash registry :Cash Registry B 2022-11-17T09:14:46.220545500
+client Denis served at cash registry :Cash Registry C 2022-11-17T09:14:47.096448
+client Vlad served at cash registry :Cash Registry A 2022-11-17T09:14:50.368510500
+client Dmytro served at cash registry :Cash Registry C 2022-11-17T09:14:54.041246400
+client Andrew spawned at: 261,1 2022-11-17T09:14:56.977320800
+client Denis spawned at: 262,0 2022-11-17T09:14:58.489595700
+client Maria served at cash registry :Cash Registry B 2022-11-17T09:14:58.623022200
+client Oleg spawned at: 291,1 2022-11-17T09:15:00.002291900
+client Olena spawned at: 262,0 2022-11-17T09:15:01.513026300
+client Maxim spawned at: 262,0 2022-11-17T09:15:03.026357200
+client Dmytro spawned at: 292,0 2022-11-17T09:15:04.537554500
+client Halyna spawned at: 460,0 2022-11-17T09:15:06.050004600

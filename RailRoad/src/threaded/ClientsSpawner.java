@@ -38,7 +38,7 @@ public class ClientsSpawner extends Thread{
                 }else {
                     lock.lock();
                     int clientsCount = map.getClients().size();
-                    int clientsLimit = LINE_MAX_CLIENTS_COUNT * map.getCashRegistries().size();
+                    int clientsLimit = LINE_MAX_CLIENTS_COUNT * (map.getCashRegistries().size()-1);
                     if (clientsCount >= clientsLimit)
                         enableSpawning = false;
                     else if (clientsCount < clientsLimit * 0.7)
