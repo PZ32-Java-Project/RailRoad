@@ -46,6 +46,8 @@ public class ClientServer extends Thread{
             }
             if (isNull){
                 if (isNotEmpty) {
+                    var line = cashRegistry.getLine();
+                    var client = line.getClients().peek();
                     try {
                         var ticketsCount =  cashRegistry.getLine().getClients().peek().getTicketsCount();
                         if(hall.isTerminate()){
@@ -53,6 +55,7 @@ public class ClientServer extends Thread{
                             System.out.println("ClientServer "+ cashRegistry.getId() +" has stopped");
                             return;
                         }
+
                         if(interval==-1) {
                             var random = new Random();
                             sleep((random.nextInt(2500)+5000)*ticketsCount);
@@ -75,8 +78,9 @@ public class ClientServer extends Thread{
                         }
 
                         // Retrieve client
-                        var line = cashRegistry.getLine();
-                        var client = line.getClients().poll();
+                      //  var line = cashRegistry.getLine();
+                       //  client = line.getClients().poll();
+                         line.getClients().remove(client);
                         cashRegistry.updatedLineUI();
 
                         // Move to an exit
