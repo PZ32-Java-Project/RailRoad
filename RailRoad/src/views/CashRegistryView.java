@@ -20,14 +20,16 @@ public class CashRegistryView implements IViewable {
         pane.getChildren().add(rectangle);
 
         rectangle.setOnMouseClicked(mouseEvent -> {
-            // Disable cash registry
-            cashRegistry.setOnPause(true);
+            var reserveCashRegistry = Map.getInstance().getReserveCashRegistry();
+            var isOnPause = cashRegistry.isOnPause();
+
+            // Disable/enable cash registry
+            cashRegistry.setOnPause(!isOnPause);
             updateUI();
 
-            // Get and enable reserve cash registry
-            var reserveCashRegistry = Map.getInstance().getReserveCashRegistry();
-            if (reserveCashRegistry.isOnPause()) {
-                reserveCashRegistry.setOnPause(false);
+            // Enable/disable reserve cash registry
+            if (reserveCashRegistry.isOnPause() != isOnPause) {
+                reserveCashRegistry.setOnPause(isOnPause);
                 reserveCashRegistry.getView().updateUI();
             }
         });
